@@ -1,16 +1,20 @@
 # Retry recovery: collaboration plan and scenario matrix
 
-Status: draft for collaborator review; updated 2026-10-18.
-These are proposed fixture expectations, not adopted MCP semantics or completed tests.
-An initial real-MCP recovery harness is implemented and run (see below). PIC signed-approval
-integration is still pending Fabio's review/contribution; it has not been run.
+Status: draft for collaborator review; updated 2026-10-20.
+The matrix contains both executed and proposed cases; coverage is identified below. These
+expectations are not adopted MCP semantics.
+A real-MCP recovery harness is implemented and run (see below). A non-dispatching PIC
+signed-approval adapter is implemented in `pic_adapter/` and exercised with real pinned PIC
+verification. A03 remains unexecuted as an MCP scenario; pruning, durability and concurrency
+remain unexecuted.
 
 ## Purpose and ownership
 
 Build deterministic test material for the retry-identity work discussed in
 [modelcontextprotocol/modelcontextprotocol#3394](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/3394).
 Arjun owns the failure-case matrix, lost-response/recovery harness and effect-count oracle.
-Fabio has agreed to contribute approval verification and the signed-approval adapter.
+Fabio contributes approval verification and the signed-approval adapter (`pic_adapter/`,
+see [adapter-contract.md](adapter-contract.md)).
 ndreno proposed taking the SEP specification and rationale. Sponsor, wire format and final
 conformance expectations require their own review; this fixture does not predetermine them.
 Other contributors' vectors must retain source attribution and their stated limitations.
@@ -27,14 +31,18 @@ guarantee for a remote payment.
 | --- | --- | --- |
 | Original lost-response repository | `6373793aed3c98c281d6fa695afe9fb6fa541586` | Preserve both root scripts and root requirements |
 | MCP Python SDK in original baseline | `mcp==2.2.0` | Preserve negotiated-version logging; no SDK upgrade in this work |
-| Fabio's refund example | [`eb7cd4672addc02e1ea80a7a83fadf97d9b0a93e`](https://github.com/pic-standard/pic-standard/tree/eb7cd4672addc02e1ea80a7a83fadf97d9b0a93e/examples/refund-approval) | Example source, fixtures and workflow checks |
+| Fabio's refund example | [`eb7cd4672addc02e1ea80a7a83fadf97d9b0a93e`](https://github.com/pic-standard/pic-standard/tree/eb7cd4672addc02e1ea80a7a83fadf97d9b0a93e/examples/refund-approval) | Vendored unmodified under `pic_adapter/vendor/`; example source, fixtures and workflow checks |
 | PIC SDK dependency declared by that example | `330fdd817ef81d43461ea1787939e0d1cc87d589` | `pic-standard[crypto]` source pin; package version alone is insufficient |
-| PIC transitive constraints | `examples/refund-approval/constraints.txt` at the example pin | Retain separately; combined dependency resolution is not yet tested |
+| PIC transitive constraints | `constraints.txt` at the example pin (vendored) | Applied to every installation step of the approval setup |
 
 Record Python version, both SDK source/version identities, dependency resolution and
-negotiated MCP protocol version in future results. Do not assume combined-install
-compatibility. If dependencies conflict, retain separate environments behind the adapter
-boundary until an explicit, reviewed resolution exists.
+negotiated MCP protocol version in results. The combined install has been tested:
+`mcp==2.2.0` and the crypto-only PIC pin resolve together when the refund constraints are
+applied to both installation steps (Python 3.11.9). The combined environment retains the
+pinned refund dependencies and adds MCP and its dependencies. Its resolved package list is
+recorded in `results.json`. PIC's `[mcp]` extra is not installed because it requires
+`mcp<2`. Approval verification still runs in a separate worker process, to isolate the
+vendored module names and the test clock, not for dependency reasons.
 
 ## Shared definitions and independent oracles
 
@@ -106,8 +114,9 @@ admission evidence or an explicit refusal policy are design options, not decided
    must explicitly exclude harness-only attempt metadata rather than claiming byte-identical
    arguments in the original scripts.
 3. Inject transitions with barriers and a controllable clock. Do not wait 24 hours or use
-   sleeps to create a race. Fabio should confirm clock injection supported by the pinned SDK;
-   do not stub signature/freshness verification and report it as actual PIC verification.
+   sleeps to create a race. The pinned SDK has no clock parameter; the approval cases use a
+   worker-scoped test clock described in [adapter-contract.md](adapter-contract.md).
+   Signature and freshness verification are never stubbed and reported as PIC verification.
 4. Keep effect ledger, dedup state, approval verification, caller authorization and disclosure
    policy separately observable. No real payments, production credentials or personal data.
 5. Missing/invalid approval bindings or adapter errors cannot reach a new-effect dispatch.
@@ -123,17 +132,20 @@ admission evidence or an explicit refusal policy are design options, not decided
 
 ## Adapter and review
 
-See [adapter-contract.md](adapter-contract.md). Agree its inputs/outputs in this draft PR.
-Fabio can propose changes or submit an adapter PR from his fork; repository write access
-is not required to contribute through a fork.
+See [adapter-contract.md](adapter-contract.md) for the implemented contract
+(`retry-recovery-draft-1`), its clock and keyring controls at the SDK pin, and the items
+open for review. The adapter lives in `pic_adapter/`; the refund example it reuses is
+vendored unmodified under `pic_adapter/vendor/` (see `SOURCE.md`). Contributions come
+through forks; repository write access is not required.
 
 ## Executed first subset
 
-Install the root requirements into an isolated environment, then from this directory:
+Complete the [PIC approval setup](#pic-approval-setup) below before running the combined
+runner, which now also runs the approval cases. Then, from this directory:
 
 ```bash
-python run_cases.py --output results.json
-python -m unittest -v test_recovery
+.venv/bin/python run_cases.py --output results.json
+.venv/bin/python -m unittest -v test_recovery
 ```
 
 The runner checks mcp==2.2.0. It uses actual ClientSession/MCPServer memory streams,
@@ -149,40 +161,125 @@ The tool is a synthetic refund, not a real payment or scheduling integration.
 | intentional_repeat | T04 identity distinction; ryjen D | 2 / completed (new operation ID) |
 | commit_then_error | R05; R02 reserved/unknown boundary | 1 / unknown |
 | unsafe_success_only_cache | R04 | 2 / completed (expected unsafe control) |
-| result_disclosure_denied | Disclosure half of A02; no approval expiry injected yet | 1 / denied, no receipt marker in delivered wire response |
+| result_disclosure_denied | Disclosure half of A02; no approval in this case | 1 / denied, no receipt marker in delivered wire response |
 | execution_revoked_recovery_allowed | A04 with disclosure allowed | 1 / original receipt; no new execution |
 | different_tenant_rejected | A05 | 1 / denied, no original receipt marker |
 | same_identity_changed_args | Semantic mismatch half of A06; no signature verification | 1 / conflict |
 | fresh_key_each_attempt | ryjen E | 2 / completed; models fresh per-attempt IDs, not a production server claim |
 
 `results.json` records source hashes, versions, actual provider counts, client observations,
-scripted client reports, JSON-RPC IDs and injected faults. `environment.txt` records resolved
-dependencies. No LLM participates and no PIC checks are mocked as if verified.
+scripted client reports, JSON-RPC IDs and injected faults. No LLM participates and no PIC
+checks are mocked as if verified. The existing `environment.txt` and `b1_*.log` files
+document Arjun's earlier baseline runs; the `pip freeze` embedded in the regenerated
+`results.json` describes the combined run reported here.
 
-Eight separate stdlib policy tests cover an unresolved reservation, receipt-copy isolation,
-revoked execution versus allowed recovery, principal isolation, invalid amounts, post-commit
-error recovery, delayed/in-flight negative read-back (ryjen C / X02), and empty success (X03).
-The read-back test advances a controlled model state; it is not a concurrent provider or a
-real network/eventual-consistency experiment. Provider facts remain separate from recovery
-knowledge: an effect can exist while the client correctly reports unknown.
+The stdlib policy tests in `test_recovery.py` cover an unresolved reservation, receipt-copy
+isolation, revoked execution versus allowed recovery, principal isolation, invalid amounts,
+post-commit error recovery, delayed/in-flight negative read-back (ryjen C / X02), and empty
+success (X03). The read-back test advances a controlled model state; it is not a concurrent
+provider or a real network/eventual-consistency experiment. Provider facts remain separate
+from recovery knowledge: an effect can exist while the client correctly reports unknown.
 
-Majny's proposed notification fixture is not implemented here; R01/T04/R05 are corresponding
-synthetic-provider patterns to compare when his contribution arrives. Expiry, signer-key
-revocation, approval reissuance, pruning, durable recovery and concurrency remain unexecuted.
-The original root scripts were rerun separately with their unchanged requirements and checked
-for exactly one fault and counts 2 / 1; captured stdout is in the two `b1_*.log` files.
+Majny's scheduling fixture is proposed separately in
+[PR #3](https://github.com/arjun2075/mcp-b1-lost-response-repro/pull/3) and is not included
+in the results reported here; R01/T04/R05 are corresponding synthetic-provider patterns for
+comparison. The original root scripts were rerun separately with their unchanged
+requirements and checked for exactly one fault and counts 2 / 1; captured stdout is in the
+two `b1_*.log` files.
 
-Approval integration boundary: the recovery engine currently has harness-owned execution and
-disclosure policy flags only. These are synthetic policy inputs, not approvals, PIC results,
-or production authentication. The proposed non-dispatching contract is still awaiting review.
+## PIC approval setup
+
+Use Python 3.11 and apply the vendored refund constraints to every installation step.
+Paths below are POSIX; on Windows use `.venv\Scripts\python.exe`.
+
+```bash
+python3.11 -m venv .venv
+.venv/bin/python -m pip install -r ../../requirements.txt -c pic_adapter/vendor/refund_approval_eb7cd467/constraints.txt
+.venv/bin/python -m pip install "pic-standard[crypto] @ git+https://github.com/pic-standard/pic-standard.git@330fdd817ef81d43461ea1787939e0d1cc87d589" -c pic_adapter/vendor/refund_approval_eb7cd467/constraints.txt
+.venv/bin/python -m pip check
+```
+
+The vendored example's own `self_check.py` temporarily rewrites installed package metadata,
+so its baseline uses a second, dedicated environment containing only the PIC pin:
+
+```bash
+python3.11 -m venv .venv-selfcheck
+.venv-selfcheck/bin/python -m pip install "pic-standard[crypto] @ git+https://github.com/pic-standard/pic-standard.git@330fdd817ef81d43461ea1787939e0d1cc87d589" -c pic_adapter/vendor/refund_approval_eb7cd467/constraints.txt
+```
+
+Then, from this directory:
+
+```bash
+.venv/bin/python pic_adapter/run_vendor_baseline.py --python .venv/bin/python --selfcheck-python .venv-selfcheck/bin/python
+.venv/bin/python -m unittest -v test_recovery test_pic_adapter test_run_vendor_baseline
+.venv/bin/python run_cases.py --output results.json
+```
+
+`.venv/`, `.venv-*/` and `local-results/` are git-ignored. The baseline runner executes the
+upstream checks in a disposable copy and never writes into the vendored tree.
+
+## Executed approval subset
+
+The approval cases use the same MCP memory streams and response-drop fault, with real pinned
+PIC verification in the `pic_adapter` worker and a documented 2.0s SDK read timeout sized for
+verification. The provider, recovery store and caller authorization remain synthetic. Each
+case asserts, for both attempts, the provider effect count, delivered status, client-reported
+outcome and the adapter's decision; every delivered receipt is compared with the independent
+provider record, and cases with no completed attempt must deliver no receipt marker.
+
+| Runner case | Matrix coverage | Effects per attempt / final result |
+| --- | --- | --- |
+| approval_stable_identity_retry | R01 with real approval | 1, 1 / original receipt |
+| approval_recovery_without_fresh_approval | R01; retry presents no approval | 1, 1 / original receipt; one adapter call |
+| approval_expired_recovery_allowed | A01 | 1, 1 / original receipt; adapter `approval_expired` |
+| approval_expired_disclosure_denied | A02 | 1, 1 / denied, no receipt marker |
+| approval_execution_withdrawn_disclosure_allowed | A04 | 1, 1 / original receipt |
+| approval_execution_withdrawn_disclosure_denied | A04 | 1, 1 / denied, no receipt marker |
+| approval_other_tenant | A05 | 1, 1 / denied, no receipt |
+| approval_other_principal | A05 | 1, 1 / denied, no receipt |
+| approval_changed_args_conflict | A06 | 1, 1 / conflict |
+| approval_tampered_new_operation | A06 tampering control | 1, 1 / denied; adapter `signature_or_binding_rejected` |
+| approval_reissued_recovery | A07 | 1, 1 / original receipt |
+| approval_retained_decision_mismatch | A07 negative control | 1, 1 / conflict; original decision mapping retained |
+| approval_replay_fresh_operation | Replay control (provisional: conflict) | 1, 1 / conflict |
+| approval_second_decision_new_operation | T04-style positive control | 1, 2 / both completed with their own receipts |
+| approval_expired_new_effect_denied | New effect under expired approval | 0, 0 / denied |
+| approval_revoked_new_effect_denied | New effect under revoked signer | 0, 0 / denied; adapter `signer_revoked` |
+| approval_commit_then_error | R05 with real approval | 1, 1 / execution error then unknown |
+
+A05 here demonstrates that the attempted context change is rejected without returning the
+original receipt. It does not establish existence hiding; indistinguishable responses for
+present and absent identifiers are not tested.
+
+Supporting tests: `test_pic_adapter.py` verifies the adapter through a real worker (valid,
+tampered, expired, revoked, untrusted, reissued, malformed and real `PIC_VERIFIER_FAILED`
+inputs, plus client timeout, crash, cancellation and replacement paths).
+`test_recovery.py` adds approval-mode engine policy tests driven by synthetic adapter
+responses; they establish engine policy, not PIC verification. `test_run_vendor_baseline.py`
+covers the vendored-baseline runner.
+
+`results.json` additionally records per-verification request and response diagnostic digests
+(distinct from PIC's signed canonical digests), adapter decisions and their role, per-call
+latency, worker health, the adapter source, keyring and vendor-manifest hashes, a `pip freeze`
+of the run environment and the list of pending cases. Interpreter paths are display metadata
+relative to the runner directory; the Python version, package freeze and verified SDK commit
+identify the environment.
+
+Approval integration boundary: verification is real; the provider, recovery store and caller
+authorization are synthetic fixture components. Fresh approval is not required for retained
+recovery; a presented, currently verified decision is checked for consistency. Retained
+recovery currently ignores approval freshness and signer status; this candidate A03 policy
+has synthetic engine tests, and A03 remains unexecuted as an MCP scenario pending review.
 This does not claim exactly-once remote effects, cross-process durability, restart safety,
 an adopted wire format, or merged MCP conformance tests.
 
 Suggested implementation sequence:
-1. Agree matrix scope and adapter contract here.
-2. Add the recovery harness and separate synthetic effect/dedup stores.
-3. Integrate actual pinned PIC verification; run independent PIC baseline first.
-4. Add expiry, the two revocation cases, disclosure and reissuance tests.
+1. Agree matrix scope and adapter contract here. (Contract implemented as draft-1; open
+   items listed in adapter-contract.md.)
+2. Add the recovery harness and separate synthetic effect/dedup stores. (Done.)
+3. Integrate actual pinned PIC verification; run independent PIC baseline first. (Done.)
+4. Add expiry, the two revocation cases, disclosure and reissuance tests. (Done except the
+   A03 MCP scenario, pending its policy.)
 5. Add pruning/unknown-outcome cases, then concurrency and contributed fault definitions.
 6. Publish actual results and limitations; map candidate vectors to a reviewed SEP draft.
 
@@ -193,10 +290,15 @@ review before reuse.
 ## Review questions
 
 - Does the verifier expose a supported deterministic clock and keyring override at the pin?
+  Keyring: yes. Clock: no SDK parameter; a worker-scoped test clock is proposed in
+  adapter-contract.md as test instrumentation.
 - Which outputs can Fabio independently report without inferring caller authorization?
+  Proposed in adapter-contract.md (check statuses and the precise meaning of `signer_trust`).
 - Should denied recovery reveal any existence/status information in the chosen fixture policy?
 - What immutable admission evidence survives pruning, and how is reissuance bound to it?
 - Which first subset can we complete before considering an upstream conformance proposal?
+- A03 recovery policy, the outcome for the same verified decision under a fresh operation ID,
+  and the cross-context decision-ID check (see adapter-contract.md, Open for review).
 
 Sources:
 [ndreno work split](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/3394#issuecomment-6150734000),
