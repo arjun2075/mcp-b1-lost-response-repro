@@ -1,0 +1,13 @@
+test_empty_success_is_not_confirmation (test_recovery.RecoveryTests.test_empty_success_is_not_confirmation) ... ok
+test_error_after_commit_is_unknown_and_does_not_retry (test_recovery.RecoveryTests.test_error_after_commit_is_unknown_and_does_not_retry) ... ok
+test_invalid_amounts_never_dispatch (test_recovery.RecoveryTests.test_invalid_amounts_never_dispatch) ... ok
+test_negative_readback_cannot_resolve_inflight_operation (test_recovery.RecoveryTests.test_negative_readback_cannot_resolve_inflight_operation) ... ok
+test_principal_isolation (test_recovery.RecoveryTests.test_principal_isolation) ... ok
+test_replayed_receipt_cannot_mutate_provider_or_store (test_recovery.RecoveryTests.test_replayed_receipt_cannot_mutate_provider_or_store) ... ok
+test_revoke_new_execution_still_recognizes_prior_operation (test_recovery.RecoveryTests.test_revoke_new_execution_still_recognizes_prior_operation) ... ok
+test_unknown_reservation_does_not_execute (test_recovery.RecoveryTests.test_unknown_reservation_does_not_execute) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK

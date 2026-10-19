@@ -1,0 +1,594 @@
+{
+  "python": "3.12.14",
+  "mcp": "2.2.0",
+  "mcp_types": "2.2.0",
+  "source_sha256": {
+    "run_cases.py": "5cc2671ad90571f0b48097feaeb2f906d6eac980c6d1dd69ae6492b33be3d1a1",
+    "recovery.py": "55e56eb0324b44564ee1d135f29d94dc4a98eefde13abfc96f17c56c99f26d75"
+  },
+  "pic_adapter": "not implemented; no signed approval verification",
+  "results": [
+    {
+      "id": "unguarded_lost_response",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-2",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "payment-1",
+                  "amount_minor": 100,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 2
+        }
+      ],
+      "effect_count": 2,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; synthetic in-process provider/recovery policy"
+    },
+    {
+      "id": "stable_identity_retry",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-1",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "payment-1",
+                  "amount_minor": 100,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 1
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; synthetic in-process provider/recovery policy"
+    },
+    {
+      "id": "intentional_repeat",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-2",
+                "operation_id": "operation-2",
+                "args": {
+                  "payment_id": "payment-1",
+                  "amount_minor": 100,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 2
+        }
+      ],
+      "effect_count": 2,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "reserved",
+          "operation_id": "operation-2"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-2"
+        }
+      ],
+      "scope": "real MCP memory streams; synthetic in-process provider/recovery policy"
+    },
+    {
+      "id": "commit_then_error",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        4
+      ],
+      "transport_faults": [],
+      "attempts": [
+        {
+          "attempt": 1,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "execution_error",
+              "outcome": "unknown"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "unknown"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "post_commit_error",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; synthetic in-process provider/recovery policy"
+    },
+    {
+      "id": "unsafe_success_only_cache",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        4
+      ],
+      "transport_faults": [],
+      "attempts": [
+        {
+          "attempt": 1,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "execution_error",
+              "outcome": "unknown"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-2",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "payment-1",
+                  "amount_minor": 100,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 2
+        }
+      ],
+      "effect_count": 2,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "post_commit_error",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; synthetic in-process provider/recovery policy"
+    },
+    {
+      "id": "result_disclosure_denied",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; synthetic in-process provider/recovery policy"
+    },
+    {
+      "id": "execution_revoked_recovery_allowed",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-1",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "payment-1",
+                  "amount_minor": 100,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 1
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; synthetic in-process provider/recovery policy"
+    },
+    {
+      "id": "different_tenant_rejected",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; synthetic in-process provider/recovery policy"
+    },
+    {
+      "id": "same_identity_changed_args",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "conflict"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; synthetic in-process provider/recovery policy"
+    },
+    {
+      "id": "fresh_key_each_attempt",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-2",
+                "operation_id": "operation-2",
+                "args": {
+                  "payment_id": "payment-1",
+                  "amount_minor": 100,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 2
+        }
+      ],
+      "effect_count": 2,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "reserved",
+          "operation_id": "operation-2"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-2"
+        }
+      ],
+      "scope": "real MCP memory streams; synthetic in-process provider/recovery policy"
+    }
+  ],
+  "passed": 10,
+  "total": 10
+}
