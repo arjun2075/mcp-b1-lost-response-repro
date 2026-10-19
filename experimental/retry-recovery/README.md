@@ -87,6 +87,9 @@ controls to test, not MCP conformance. In-process policy tests are distinguished
 | X01 | Duplicate transport delivery with same operation identity | 1 under safe profile | Application effect suppression; log transport fault separately from model/application retry |
 | X02 | Read-back returns empty while original request is in flight or provider visibility is delayed | 1 after controlled completion | Remain unknown until reliable evidence; missing list entry is not proof of non-execution |
 | X03 | Transport success with empty payload | Assert actual oracle independently | Do not report confirmed success/non-execution solely from transport status; inspect operation outcome evidence |
+| S01 | Scheduling: notifications committed, response dropped, one retry with same arguments; argument key and caller operation ID each | 1 | Retry replays the first result, no redispatch with either key. Implemented, run locally ([scheduling/](scheduling/)); contributed by @Majny |
+| S02 | Scheduling: no fault, identical arguments sent again on purpose as a new operation; argument key and caller operation ID each | 2 intended; argument key gives 1 | Argument key coalesces the repeat: expected counterexample. New operation ID gives 2. Implemented, run locally ([scheduling/](scheduling/)); contributed by @Majny |
+| S03 | Scheduling: notifications committed, then an error before the result; one retry; success-only cache vs. record before effect | 1 intended; success-only gives 2 | Success-only cache redispatches with either key: expected counterexample. Record-first gives 1 and "outcome unknown" on retry, in-process only. Implemented, run locally ([scheduling/](scheduling/)); contributed by @Majny |
 
 For A03, denying all recovery under a deployment's policy is also a legitimate candidate.
 Do not force PIC approval freshness or key trust to authorize disclosure. Agree the chosen
