@@ -1,0 +1,9 @@
+{
+  "trusted_keys": {
+    "merchant-test-v1": {
+      "public_key": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+      "expires_at": "2030-01-01T00:00:00Z"
+    }
+  },
+  "revoked_keys": []
+}
