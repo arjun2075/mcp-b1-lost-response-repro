@@ -1,8 +1,9 @@
 # Retry recovery: collaboration plan and scenario matrix
 
-Status: draft for collaborator review; 2026-10-16.
+Status: draft for collaborator review; updated 2026-10-18.
 These are proposed fixture expectations, not adopted MCP semantics or completed tests.
-This change adds planning documents only. No combined fixture has been implemented or run.
+An initial real-MCP recovery harness is implemented and run (see below). PIC signed-approval
+integration is still pending Fabio's review/contribution; it has not been run.
 
 ## Purpose and ownership
 
@@ -56,8 +57,9 @@ dispatch; authorize receipt disclosure independently; require current execution 
 for any new dispatch; never infer non-execution from a pruned-record lookup miss.
 Recognition must not itself disclose operation existence across tenants.
 
-Every row below is **planned / not run in this change**. Except the two baseline rows,
-expectations describe candidate application-layer controls to test, not MCP conformance.
+The execution coverage table below identifies the implemented subset; other rows remain
+planned. Except the two baseline rows, expectations describe candidate application-layer
+controls to test, not MCP conformance. In-process policy tests are distinguished from SDK cases.
 
 ## Initial deterministic matrix
 
@@ -69,6 +71,7 @@ expectations describe candidate application-layer controls to test, not MCP conf
 | R02 | Reserve operation, commit synthetic provider effect, interrupt before receipt storage; no provider lookup | 1 | Recovery remains unknown, no redispatch; oracle knows more than recovery |
 | R03 | Same interrupted boundary as R02, provider supports authoritative operation lookup | 1 | Reconcile original receipt; log that lookup, not key alone, closed the gap |
 | R04 | Deliberately unsafe effect-then-record control loses record; retry admitted | 2 | Demonstrate remote/local transaction gap; expected counterexample, not safe behavior |
+| R05 | Provider commits, then returns an error before recovery receipt storage; reservation retained | 1 | Retry stays unknown without dispatch; contrasts with unsafe success-only cache eviction in R04 |
 | A01 | Approval expires after first commit; receipt retained; disclosure independently allowed | 1 | Return historical receipt without treating expired approval as new-effect permission |
 | A02 | Same expiry, but current receipt disclosure denied | 1 | Denial without receipt marker, no dispatch |
 | A03 | Signer key revoked after first commit; retained receipt; recovery identity independently authenticated | 1 | Reject that approval for new execution; disclose historical receipt only under explicit current recovery policy |
@@ -124,6 +127,57 @@ See [adapter-contract.md](adapter-contract.md). Agree its inputs/outputs in this
 Fabio can propose changes or submit an adapter PR from his fork; repository write access
 is not required to contribute through a fork.
 
+## Executed first subset
+
+Install the root requirements into an isolated environment, then from this directory:
+
+```bash
+python run_cases.py --output results.json
+python -m unittest -v test_recovery
+```
+
+The runner checks mcp==2.2.0. It uses actual ClientSession/MCPServer memory streams,
+fresh JSON-RPC IDs and a deterministic after-commit response drop with a 0.25s SDK
+read timeout. This shorter timeout differs from the unchanged original 5s baseline.
+There is one explicit scripted application retry per scenario, no automatic SDK retry.
+The tool is a synthetic refund, not a real payment or scheduling integration.
+
+| Runner case | Matrix coverage | Observed effects / retry result |
+| --- | --- | --- |
+| unguarded_lost_response | B01 shape; ryjen A | 2 / completed |
+| stable_identity_retry | R01; ryjen B under this in-process enforcement | 1 / original receipt |
+| intentional_repeat | T04 identity distinction; ryjen D | 2 / completed (new operation ID) |
+| commit_then_error | R05; R02 reserved/unknown boundary | 1 / unknown |
+| unsafe_success_only_cache | R04 | 2 / completed (expected unsafe control) |
+| result_disclosure_denied | Disclosure half of A02; no approval expiry injected yet | 1 / denied, no receipt marker in delivered wire response |
+| execution_revoked_recovery_allowed | A04 with disclosure allowed | 1 / original receipt; no new execution |
+| different_tenant_rejected | A05 | 1 / denied, no original receipt marker |
+| same_identity_changed_args | Semantic mismatch half of A06; no signature verification | 1 / conflict |
+| fresh_key_each_attempt | ryjen E | 2 / completed; models fresh per-attempt IDs, not a production server claim |
+
+`results.json` records source hashes, versions, actual provider counts, client observations,
+scripted client reports, JSON-RPC IDs and injected faults. `environment.txt` records resolved
+dependencies. No LLM participates and no PIC checks are mocked as if verified.
+
+Eight separate stdlib policy tests cover an unresolved reservation, receipt-copy isolation,
+revoked execution versus allowed recovery, principal isolation, invalid amounts, post-commit
+error recovery, delayed/in-flight negative read-back (ryjen C / X02), and empty success (X03).
+The read-back test advances a controlled model state; it is not a concurrent provider or a
+real network/eventual-consistency experiment. Provider facts remain separate from recovery
+knowledge: an effect can exist while the client correctly reports unknown.
+
+Majny's proposed notification fixture is not implemented here; R01/T04/R05 are corresponding
+synthetic-provider patterns to compare when his contribution arrives. Expiry, signer-key
+revocation, approval reissuance, pruning, durable recovery and concurrency remain unexecuted.
+The original root scripts were rerun separately with their unchanged requirements and checked
+for exactly one fault and counts 2 / 1; captured stdout is in the two `b1_*.log` files.
+
+Approval integration boundary: the recovery engine currently has harness-owned execution and
+disclosure policy flags only. These are synthetic policy inputs, not approvals, PIC results,
+or production authentication. The proposed non-dispatching contract is still awaiting review.
+This does not claim exactly-once remote effects, cross-process durability, restart safety,
+an adopted wire format, or merged MCP conformance tests.
+
 Suggested implementation sequence:
 1. Agree matrix scope and adapter contract here.
 2. Add the recovery harness and separate synthetic effect/dedup stores.
@@ -151,4 +205,6 @@ Sources:
 [Fabio expiry vector](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/3394#issuecomment-6122699649),
 [retention vector](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/3394#issuecomment-6130163272),
 [Arjun retention clarification](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/3394#issuecomment-6127493861),
-[contributor sampling correction](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/3394#issuecomment-6192645077).
+[contributor sampling correction](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/3394#issuecomment-6192645077),
+[Majny's offered cases](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/3394#issuecomment-6250429570),
+[ryjen's proposed A-E matrix](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/3394#issuecomment-6254309502).
