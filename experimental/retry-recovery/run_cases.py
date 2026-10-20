@@ -98,6 +98,16 @@ APPROVAL_CASES = {
     "approval_expired_disclosure_denied": case(
         "A02", attempt("valid"), attempt("expired", disclose=False),
         [1, 1], [DROPPED, "denied"], [ALLOW, ("deny", "approval_expired")]),
+    "approval_revoked_signer_recovery_allowed": case(
+        "A03 candidate policy: revoked signer, disclosure allowed", attempt("valid"),
+        attempt("revoked"),
+        [1, 1], [DROPPED, "completed"], [ALLOW, ("deny", "signer_revoked")],
+        bound={"decision-001": "operation-1"}),
+    "approval_revoked_signer_disclosure_denied": case(
+        "A03 candidate policy: revoked signer, disclosure denied", attempt("valid"),
+        attempt("revoked", disclose=False),
+        [1, 1], [DROPPED, "denied"], [ALLOW, ("deny", "signer_revoked")],
+        bound={"decision-001": "operation-1"}),
     "approval_execution_withdrawn_disclosure_allowed": case(
         "A04", attempt("valid"), attempt("valid", execute=False),
         [1, 1], [DROPPED, "completed"], [ALLOW, ALLOW]),
@@ -144,8 +154,6 @@ APPROVAL_CASES = {
 }
 
 PENDING = {
-    "A03": "revoked signer at recovery: current engine behavior covered by synthetic "
-           "policy tests; adoption pending review; MCP scenario not run",
     "T01-T03": "pruning and retention: not implemented",
     "C01": "concurrency: not exercised",
     "durability": "restart and crash recovery: not exercised",
@@ -300,10 +308,12 @@ def approval_requests() -> dict:
     tampered["action"]["args"]["amount_minor"] = 9999
     changed = signed(action={"tool": "refund",
                              "args": {**decision["action"]["args"], "amount_minor": 5000}})
+    valid = signed()
     return {
-        "valid": (signed(), context()),
+        "valid": (valid, context()),
         "expired": (signed(), context(clock=EXPIRED_AT)),
-        "revoked": (signed(), context("revoked")),
+        # The same signed proposal as "valid"; only the keyring snapshot differs.
+        "revoked": (copy.deepcopy(valid), context("revoked")),
         "reissued": (signed(approval_ref="approval-002"), context()),
         "second_decision": (signed(decision_id="decision-002", approval_ref="approval-201"),
                             context()),

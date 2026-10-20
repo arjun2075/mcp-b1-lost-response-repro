@@ -5,8 +5,8 @@ The matrix contains both executed and proposed cases; coverage is identified bel
 expectations are not adopted MCP semantics.
 A real-MCP recovery harness is implemented and run (see below). A non-dispatching PIC
 signed-approval adapter is implemented in `pic_adapter/` and exercised with real pinned PIC
-verification. A03 remains unexecuted as an MCP scenario; pruning, durability and concurrency
-remain unexecuted.
+verification. A03 is exercised as an MCP scenario under a candidate recovery policy proposed
+for review; pruning, durability and concurrency remain unexecuted.
 
 ## Purpose and ownership
 
@@ -233,6 +233,8 @@ provider record, and cases with no completed attempt must deliver no receipt mar
 | approval_recovery_without_fresh_approval | R01; retry presents no approval | 1, 1 / original receipt; one adapter call |
 | approval_expired_recovery_allowed | A01 | 1, 1 / original receipt; adapter `approval_expired` |
 | approval_expired_disclosure_denied | A02 | 1, 1 / denied, no receipt marker |
+| approval_revoked_signer_recovery_allowed | A03 (candidate policy) | 1, 1 / original receipt; adapter `signer_revoked` |
+| approval_revoked_signer_disclosure_denied | A03 (candidate policy) | 1, 1 / denied, no receipt marker; adapter `signer_revoked` |
 | approval_execution_withdrawn_disclosure_allowed | A04 | 1, 1 / original receipt |
 | approval_execution_withdrawn_disclosure_denied | A04 | 1, 1 / denied, no receipt marker |
 | approval_other_tenant | A05 | 1, 1 / denied, no receipt |
@@ -271,18 +273,22 @@ identify the environment.
 Approval integration boundary: verification is real; the provider, recovery store and caller
 authorization are synthetic fixture components. Fresh approval is not required for retained
 recovery; a presented, currently verified decision is checked for consistency. Retained
-recovery currently ignores approval freshness and signer status; this candidate A03 policy
-has synthetic engine tests, and A03 remains unexecuted as an MCP scenario pending review.
-This does not claim exactly-once remote effects, cross-process durability, restart safety,
-an adopted wire format, or merged MCP conformance tests.
+recovery currently ignores approval freshness and signer status and uses independent
+disclosure permission. For A03 this candidate policy, proposed for review, is exercised with
+real signer revocation: the same signed proposal is verified against two fixture keyring
+snapshots, before and after revocation. The revoked approval is rejected, and any receipt
+disclosure rests on the harness-owned authenticated context, the scoped retained record and
+current disclosure permission, never on the rejected proposal. This does not claim
+exactly-once remote effects, cross-process durability, restart safety, an adopted wire
+format, or merged MCP conformance tests.
 
 Suggested implementation sequence:
 1. Agree matrix scope and adapter contract here. (Contract implemented as draft-1; open
    items listed in adapter-contract.md.)
 2. Add the recovery harness and separate synthetic effect/dedup stores. (Done.)
 3. Integrate actual pinned PIC verification; run independent PIC baseline first. (Done.)
-4. Add expiry, the two revocation cases, disclosure and reissuance tests. (Done except the
-   A03 MCP scenario, pending its policy.)
+4. Add expiry, the two revocation cases, disclosure and reissuance tests. (Done; A03 under
+   the candidate recovery policy proposed for review.)
 5. Add pruning/unknown-outcome cases, then concurrency and contributed fault definitions.
 6. Publish actual results and limitations; map candidate vectors to a reviewed SEP draft.
 

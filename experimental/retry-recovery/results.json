@@ -3,7 +3,7 @@
   "mcp": "2.2.0",
   "mcp_types": "2.2.0",
   "source_sha256": {
-    "run_cases.py": "920942bcce848363eab4ce7a63269422ecec2f6df1ef215417d20c50b669f43d",
+    "run_cases.py": "0fc92931a350c2caeb8a895f803c4356b939fc0fe3967e27b3f6cd493d7552ae",
     "recovery.py": "20f46b96dc30502c65788407fdf54b9d3f5db693a158906d6d5e8d78797737b1",
     "pic_adapter/clock.py": "d05b0d883004f83f933d2c2c05b5c39783b99dbfd0a1f14996fe89c7749cded0",
     "pic_adapter/verify.py": "e3a498da99b90a6629861e01ecd4fa1e754a38845f7a04b92badebb5f60a4302",
@@ -63,7 +63,7 @@
       "python": ".venv/Scripts/python.exe",
       "ready": {
         "installed_pic_sdk_commit": "330fdd817ef81d43461ea1787939e0d1cc87d589",
-        "pid": 30088,
+        "pid": 26652,
         "protocol": 1,
         "type": "ready"
       },
@@ -71,7 +71,7 @@
       "terminations": [],
       "cleanup_errors": [],
       "unconfirmed_processes": 0,
-      "verifications": 33
+      "verifications": 37
     }
   },
   "results": [
@@ -724,7 +724,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.018831,
+          "latency_s": 0.019071,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -742,7 +742,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.00512,
+          "latency_s": 0.005052,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -837,7 +837,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004823,
+          "latency_s": 0.004815,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -932,7 +932,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004891,
+          "latency_s": 0.005015,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -950,7 +950,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004929,
+          "latency_s": 0.004875,
           "decision": "deny",
           "reason_code": "approval_expired",
           "checks": {
@@ -1038,7 +1038,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004484,
+          "latency_s": 0.004681,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1056,7 +1056,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004987,
+          "latency_s": 0.004939,
           "decision": "deny",
           "reason_code": "approval_expired",
           "checks": {
@@ -1069,6 +1069,225 @@
           },
           "request_sha256": "1dc9bd0a59dbc41062f1d384907f4de4c002e9955f435096aa51dba0b44f3259",
           "response_sha256": "66f5b5b46bd9c7d3bdeaf289ab27be1b6f9fb5e2ad5f0af4d32b2334b2130a88",
+          "role": "retained_operation_verification",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_revoked_signer_recovery_allowed",
+      "matrix": "A03 candidate policy: revoked signer, disclosure allowed",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "revoked",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-1",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "pay_A",
+                  "amount_minor": 4000,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004383,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004573,
+          "decision": "deny",
+          "reason_code": "signer_revoked",
+          "checks": {
+            "expected_action": "not_evaluated",
+            "freshness": "unavailable",
+            "proposal_binding": "unavailable",
+            "signature": "unavailable",
+            "signer_trust": "fail",
+            "workflow_profile": "not_evaluated"
+          },
+          "request_sha256": "ad04e4eaa0a58ee980cda2ae148bc0cf69d6347e1cebd6996d4feefde5d35bdb",
+          "response_sha256": "80fe21c772f82399a75f8a26cbf80cc091097f20b493068215af644a5e8b2a50",
+          "role": "retained_operation_verification",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_revoked_signer_disclosure_denied",
+      "matrix": "A03 candidate policy: revoked signer, disclosure denied",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "revoked",
+          "context": {
+            "disclose": false
+          },
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.00439,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.005191,
+          "decision": "deny",
+          "reason_code": "signer_revoked",
+          "checks": {
+            "expected_action": "not_evaluated",
+            "freshness": "unavailable",
+            "proposal_binding": "unavailable",
+            "signature": "unavailable",
+            "signer_trust": "fail",
+            "workflow_profile": "not_evaluated"
+          },
+          "request_sha256": "ad04e4eaa0a58ee980cda2ae148bc0cf69d6347e1cebd6996d4feefde5d35bdb",
+          "response_sha256": "80fe21c772f82399a75f8a26cbf80cc091097f20b493068215af644a5e8b2a50",
           "role": "retained_operation_verification",
           "decision_mismatch_observed": false
         }
@@ -1153,7 +1372,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004445,
+          "latency_s": 0.004474,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1171,7 +1390,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004885,
+          "latency_s": 0.004858,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1260,7 +1479,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004422,
+          "latency_s": 0.004285,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1278,7 +1497,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004832,
+          "latency_s": 0.00473,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1366,7 +1585,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004481,
+          "latency_s": 0.004287,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1384,7 +1603,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004937,
+          "latency_s": 0.00465,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1472,7 +1691,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004428,
+          "latency_s": 0.004282,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1490,7 +1709,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.005058,
+          "latency_s": 0.004859,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1576,7 +1795,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004841,
+          "latency_s": 0.004896,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1594,7 +1813,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004997,
+          "latency_s": 0.004819,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1680,7 +1899,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004651,
+          "latency_s": 0.004554,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1698,7 +1917,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004704,
+          "latency_s": 0.004655,
           "decision": "deny",
           "reason_code": "signature_or_binding_rejected",
           "checks": {
@@ -1798,7 +2017,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004398,
+          "latency_s": 0.004869,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1816,7 +2035,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004888,
+          "latency_s": 0.004807,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1902,7 +2121,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004312,
+          "latency_s": 0.004377,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1920,7 +2139,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004811,
+          "latency_s": 0.004891,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -2010,7 +2229,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004371,
+          "latency_s": 0.004393,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -2028,7 +2247,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004784,
+          "latency_s": 0.0048,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -2133,7 +2352,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.00424,
+          "latency_s": 0.004369,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -2151,7 +2370,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.00419,
+          "latency_s": 0.004293,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -2242,7 +2461,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004164,
+          "latency_s": 0.004359,
           "decision": "deny",
           "reason_code": "approval_expired",
           "checks": {
@@ -2260,7 +2479,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004214,
+          "latency_s": 0.004319,
           "decision": "deny",
           "reason_code": "approval_expired",
           "checks": {
@@ -2345,7 +2564,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004065,
+          "latency_s": 0.004085,
           "decision": "deny",
           "reason_code": "signer_revoked",
           "checks": {
@@ -2363,7 +2582,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.003989,
+          "latency_s": 0.004052,
           "decision": "deny",
           "reason_code": "signer_revoked",
           "checks": {
@@ -2449,7 +2668,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004176,
+          "latency_s": 0.00424,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -2467,7 +2686,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004334,
+          "latency_s": 0.004344,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -2502,10 +2721,9 @@
       "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
     }
   ],
-  "approval_passed": 17,
-  "approval_total": 17,
+  "approval_passed": 19,
+  "approval_total": 19,
   "pending": {
-    "A03": "revoked signer at recovery: current engine behavior covered by synthetic policy tests; adoption pending review; MCP scenario not run",
     "T01-T03": "pruning and retention: not implemented",
     "C01": "concurrency: not exercised",
     "durability": "restart and crash recovery: not exercised"

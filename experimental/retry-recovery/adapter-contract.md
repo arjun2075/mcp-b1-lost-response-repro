@@ -197,7 +197,11 @@ own `Context`, and calls the synchronous engine with no intervening `await`.
   operation identity, matching arguments and current disclosure permission
   suffice. A presented, currently verified decision is checked for consistency
   with the retained one; a different verified decision is a `conflict`.
-  Recovery currently ignores approval freshness and signer status.
+  Recovery currently ignores approval freshness and signer status. For A03 this
+  is a *candidate policy, proposed for review*, exercised with real signer
+  revocation: the revoked approval is rejected (`signer_revoked`), and receipt
+  disclosure rests on the harness-owned authenticated context, the scoped
+  retained record and current disclosure permission.
 * **Disclosure first:** in approval mode, denied disclosure returns a generic
   `denied` before conflicts or unknown outcomes are distinguished.
 * **Same verified decision, fresh operation id:** no new effect. *Provisional:*
@@ -232,15 +236,18 @@ constrain how other profiles authorize operations.
 | Modified tool, impact, arguments, claim, intent, provenance or signature fails the relevant check | `test_pic_adapter.py` |
 | Missing expiry rejected by the profile | `test_pic_adapter.py` |
 | Expiry rejected through real pinned freshness, at a controlled instant | `test_pic_adapter.py`; MCP scenarios A01, A02 |
-| Revoked signer key differs from withdrawn caller permission | `test_pic_adapter.py`; MCP scenarios A04 and new effect under revoked signer |
+| Revoked signer key differs from withdrawn caller permission | `test_pic_adapter.py`; MCP scenarios A03 (candidate policy, disclosure allowed and denied), A04, and new effect under revoked signer |
 | Reissued approval recovers the original operation; a different decision conflicts | MCP scenarios A07 and its negative control |
 | Unavailable verifier, malformed input or exceptions cannot dispatch | `test_pic_adapter.py` (client and in-worker tests) |
 | Upstream example self-checks still pass | `pic_adapter/run_vendor_baseline.py` |
 
 ## Open for review
 
-1. A03: whether retained recovery after signer revocation should keep the
-   current behaviour (disclose under independent permission) or refuse.
+1. A03: the candidate policy, now exercised by two MCP scenarios. After signer
+   revocation, retained recovery discloses the original receipt under
+   independent disclosure permission and returns `denied` without a receipt when
+   disclosure is denied; the revoked approval never authorizes new execution.
+   Refusing all recovery after revocation is the alternative under review.
 2. Same verified decision under a fresh operation id: `conflict` (current) or
    the original operation's outcome.
 3. The cross-context decision-id check, and whether denied recovery may
