@@ -270,29 +270,37 @@ def check_isolation(main_env: dict, self_env: dict) -> list[str]:
 def check_case_results(r: object, expected_ids: list[str], pin: str) -> list[tuple]:
     if not isinstance(r, dict):
         return [("actual-results.json is a JSON object", False, type(r).__name__)]
-    cases = [c for c in r.get("cases", []) if isinstance(c, dict)] \
-        if isinstance(r.get("cases"), list) else []
+    # Validate the original lists before filtering: a malformed entry (for example
+    # null) must fail the check, not be silently dropped.
+    raw_cases = r.get("cases")
+    cases = [c for c in raw_cases if isinstance(c, dict)] if isinstance(raw_cases, list) else []
+    cases_well_formed = isinstance(raw_cases, list) and len(cases) == len(raw_cases)
     ids = [c.get("id") for c in cases]
     dups = sorted(str(i) for i, n in collections.Counter(ids).items() if n > 1)
     missing = sorted(set(expected_ids) - set(ids))
     unexpected = sorted(str(i) for i in set(ids) - set(expected_ids))
     unmatched = sorted(str(c.get("id")) for c in cases if c.get("match") is not True)
     integrity = r.get("suite_integrity") if isinstance(r.get("suite_integrity"), dict) else {}
-    probes = [p for p in integrity.get("probes", []) if isinstance(p, dict)] \
-        if isinstance(integrity.get("probes"), list) else []
+    raw_probes = integrity.get("probes")
+    probes = [p for p in raw_probes if isinstance(p, dict)] if isinstance(raw_probes, list) else []
+    probes_well_formed = (isinstance(raw_probes, list)
+                          and len(raw_probes) == len(EXPECTED_PROBES)
+                          and len(probes) == len(raw_probes))
     names = [p.get("name") for p in probes]
     not_ok = sorted(str(p.get("name")) for p in probes if p.get("ok") is not True)
     revision = r.get("installed_pic_revision")
     installed = revision.get("commit_id") if isinstance(revision, dict) else None
     return [
         ("case ids equal pinned expectations",
-         len(ids) == len(r.get("cases", [])) and not dups and not missing and not unexpected,
-         {"duplicates": dups, "missing": missing, "unexpected": unexpected}),
+         cases_well_formed and not dups and not missing and not unexpected,
+         {"entries": len(raw_cases) if isinstance(raw_cases, list) else None,
+          "duplicates": dups, "missing": missing, "unexpected": unexpected}),
         ("every case matches", bool(cases) and not unmatched, unmatched),
         ("integrity probes are exactly the expected two, all ok",
-         sorted(map(str, names)) == sorted(EXPECTED_PROBES) and not not_ok
-         and integrity.get("ok") is True,
-         {"names": names, "not_ok": not_ok}),
+         probes_well_formed and sorted(map(str, names)) == sorted(EXPECTED_PROBES)
+         and not not_ok and integrity.get("ok") is True,
+         {"entries": len(raw_probes) if isinstance(raw_probes, list) else None,
+          "names": names, "not_ok": not_ok}),
         ("environment verified at pin",
          r.get("environment_status") == "verified"
          and r.get("declared_pic_commit") == pin and installed == pin,

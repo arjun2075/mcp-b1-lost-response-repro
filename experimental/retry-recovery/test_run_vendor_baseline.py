@@ -200,6 +200,27 @@ class ResultValidationTests(unittest.TestCase):
         v = self.verdict(lambda r: r["suite_integrity"].update(ok=False))
         self.assertFalse(v[self.PROBE_CHECK])
 
+    def test_extra_malformed_probe_entry_rejected(self):
+        # Reproduced false pass: [probe, probe, null] satisfied "exactly the expected two".
+        v = self.verdict(lambda r: r["suite_integrity"]["probes"].append(None))
+        self.assertFalse(v[self.PROBE_CHECK])
+
+    def test_non_list_probes_rejected(self):
+        for bad in ({"name": "premature_tool_call", "ok": True}, None, "probes"):
+            with self.subTest(probes=bad):
+                v = self.verdict(lambda r: r["suite_integrity"].update(probes=bad))
+                self.assertFalse(v[self.PROBE_CHECK])
+
+    def test_malformed_case_entry_rejected(self):
+        v = self.verdict(lambda r: r["cases"].append(None))
+        self.assertFalse(v[self.IDS_CHECK])
+
+    def test_non_list_cases_rejected(self):
+        for bad in ({"id": "case-00", "match": True}, None):
+            with self.subTest(cases=bad):
+                v = self.verdict(lambda r: r.update(cases=bad))
+                self.assertFalse(v[self.IDS_CHECK])
+
     def test_installed_commit_differs_from_pin(self):
         v = self.verdict(lambda r: r["installed_pic_revision"].update(commit_id="c" * 40))
         self.assertFalse(v[self.ENV_CHECK])

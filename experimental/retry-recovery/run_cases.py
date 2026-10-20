@@ -509,6 +509,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
+    if not __debug__:
+        # Scenario validation uses assert statements, which -O / PYTHONOPTIMIZE remove;
+        # refuse rather than report unchecked results as passed.
+        print("run_cases.py refuses to run with assertions disabled "
+              "(python -O or PYTHONOPTIMIZE); no new results were written", file=sys.stderr)
+        raise SystemExit(2)
     assert importlib.metadata.version("mcp") == "2.2.0"
     results, approval_results, worker = anyio.run(run_all)
     here = Path(__file__).resolve().parent

@@ -211,7 +211,7 @@ Then, from this directory:
 
 ```bash
 .venv/bin/python pic_adapter/run_vendor_baseline.py --python .venv/bin/python --selfcheck-python .venv-selfcheck/bin/python
-.venv/bin/python -m unittest -v test_recovery test_pic_adapter test_run_vendor_baseline
+.venv/bin/python -m unittest -v test_recovery test_pic_adapter test_run_vendor_baseline test_run_cases
 .venv/bin/python run_cases.py --output results.json
 ```
 
@@ -257,6 +257,9 @@ inputs, plus client timeout, crash, cancellation and replacement paths).
 `test_recovery.py` adds approval-mode engine policy tests driven by synthetic adapter
 responses; they establish engine policy, not PIC verification. `test_run_vendor_baseline.py`
 covers the vendored-baseline runner.
+
+`test_run_cases.py` checks that the runner refuses to run with assertions disabled
+(`python -O` or `PYTHONOPTIMIZE`), since its scenario validation uses `assert`.
 
 `results.json` additionally records per-verification request and response diagnostic digests
 (distinct from PIC's signed canonical digests), adapter decisions and their role, per-call

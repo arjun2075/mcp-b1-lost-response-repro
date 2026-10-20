@@ -3,7 +3,7 @@
   "mcp": "2.2.0",
   "mcp_types": "2.2.0",
   "source_sha256": {
-    "run_cases.py": "9dc0f80f08cdffc56a92969d5ea609acda5521179da6abc291e847403ae5247a",
+    "run_cases.py": "920942bcce848363eab4ce7a63269422ecec2f6df1ef215417d20c50b669f43d",
     "recovery.py": "20f46b96dc30502c65788407fdf54b9d3f5db693a158906d6d5e8d78797737b1",
     "pic_adapter/clock.py": "d05b0d883004f83f933d2c2c05b5c39783b99dbfd0a1f14996fe89c7749cded0",
     "pic_adapter/verify.py": "e3a498da99b90a6629861e01ecd4fa1e754a38845f7a04b92badebb5f60a4302",
@@ -63,7 +63,7 @@
       "python": ".venv/Scripts/python.exe",
       "ready": {
         "installed_pic_sdk_commit": "330fdd817ef81d43461ea1787939e0d1cc87d589",
-        "pid": 34512,
+        "pid": 30088,
         "protocol": 1,
         "type": "ready"
       },
@@ -724,7 +724,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.01977,
+          "latency_s": 0.018831,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -742,7 +742,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.005075,
+          "latency_s": 0.00512,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -837,7 +837,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004504,
+          "latency_s": 0.004823,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -932,7 +932,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004841,
+          "latency_s": 0.004891,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -950,7 +950,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.005057,
+          "latency_s": 0.004929,
           "decision": "deny",
           "reason_code": "approval_expired",
           "checks": {
@@ -1038,7 +1038,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004675,
+          "latency_s": 0.004484,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1056,7 +1056,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.005028,
+          "latency_s": 0.004987,
           "decision": "deny",
           "reason_code": "approval_expired",
           "checks": {
@@ -1153,7 +1153,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004838,
+          "latency_s": 0.004445,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1171,7 +1171,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004873,
+          "latency_s": 0.004885,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1260,7 +1260,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004423,
+          "latency_s": 0.004422,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1278,7 +1278,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004795,
+          "latency_s": 0.004832,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1366,7 +1366,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004492,
+          "latency_s": 0.004481,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1384,7 +1384,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.005037,
+          "latency_s": 0.004937,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1472,7 +1472,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004801,
+          "latency_s": 0.004428,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1490,7 +1490,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.005727,
+          "latency_s": 0.005058,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1576,7 +1576,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.005038,
+          "latency_s": 0.004841,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1594,7 +1594,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004888,
+          "latency_s": 0.004997,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1680,7 +1680,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004691,
+          "latency_s": 0.004651,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1698,7 +1698,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004859,
+          "latency_s": 0.004704,
           "decision": "deny",
           "reason_code": "signature_or_binding_rejected",
           "checks": {
@@ -1798,7 +1798,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004721,
+          "latency_s": 0.004398,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1902,7 +1902,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004473,
+          "latency_s": 0.004312,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -1920,7 +1920,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004805,
+          "latency_s": 0.004811,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -2010,7 +2010,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004449,
+          "latency_s": 0.004371,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -2028,7 +2028,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004911,
+          "latency_s": 0.004784,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -2133,7 +2133,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004673,
+          "latency_s": 0.00424,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -2151,7 +2151,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004472,
+          "latency_s": 0.00419,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -2242,7 +2242,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004295,
+          "latency_s": 0.004164,
           "decision": "deny",
           "reason_code": "approval_expired",
           "checks": {
@@ -2260,7 +2260,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004389,
+          "latency_s": 0.004214,
           "decision": "deny",
           "reason_code": "approval_expired",
           "checks": {
@@ -2345,7 +2345,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004214,
+          "latency_s": 0.004065,
           "decision": "deny",
           "reason_code": "signer_revoked",
           "checks": {
@@ -2363,7 +2363,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004099,
+          "latency_s": 0.003989,
           "decision": "deny",
           "reason_code": "signer_revoked",
           "checks": {
@@ -2449,7 +2449,7 @@
       "adapter_results": [
         {
           "attempt": 1,
-          "latency_s": 0.004298,
+          "latency_s": 0.004176,
           "decision": "allow",
           "reason_code": null,
           "checks": {
@@ -2467,7 +2467,7 @@
         },
         {
           "attempt": 2,
-          "latency_s": 0.004459,
+          "latency_s": 0.004334,
           "decision": "allow",
           "reason_code": null,
           "checks": {
