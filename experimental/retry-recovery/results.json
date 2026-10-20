@@ -1,12 +1,79 @@
 {
-  "python": "3.12.14",
+  "python": "3.11.9",
   "mcp": "2.2.0",
   "mcp_types": "2.2.0",
   "source_sha256": {
-    "run_cases.py": "5cc2671ad90571f0b48097feaeb2f906d6eac980c6d1dd69ae6492b33be3d1a1",
-    "recovery.py": "55e56eb0324b44564ee1d135f29d94dc4a98eefde13abfc96f17c56c99f26d75"
+    "run_cases.py": "0fc92931a350c2caeb8a895f803c4356b939fc0fe3967e27b3f6cd493d7552ae",
+    "recovery.py": "20f46b96dc30502c65788407fdf54b9d3f5db693a158906d6d5e8d78797737b1",
+    "pic_adapter/clock.py": "d05b0d883004f83f933d2c2c05b5c39783b99dbfd0a1f14996fe89c7749cded0",
+    "pic_adapter/verify.py": "e3a498da99b90a6629861e01ecd4fa1e754a38845f7a04b92badebb5f60a4302",
+    "pic_adapter/worker.py": "0d94753d2f4524ccf0a35acaec78558df6b73a5ef8b4c22873143c5c9ece8fb7",
+    "pic_adapter/client.py": "e6cfb81dda17146521b640177469a0e5417ab9db89d8d20cea30d7c35a7a8092",
+    "pic_adapter/keyrings/trusted.json": "dc8c6e27492398c7ec68cd0d2b4f101eadc73e1d90b0317fa2b795e90fddf172",
+    "pic_adapter/keyrings/revoked.json": "55d43f84c45d02260e1f16e68aa10258a1ea0b8d9efa5df1e8997739cca87efb",
+    "pic_adapter/keyrings/empty.json": "ec75dc4d8e055046fb917e32903b6fa99e6455918406ddd948d8fded53e41ebf",
+    "pic_adapter/keyrings/expiring.json": "31fb2c4af5a6b4cfc05e28d45966e4c94a5d082a51c78aec907a1ce1cc327bce",
+    "pic_adapter/vendor/MANIFEST.json": "f118798f1da10ca258e2a59bd38cd2f2f8b3e590d864a71bfc7cd576781392d6"
   },
-  "pic_adapter": "not implemented; no signed approval verification",
+  "environment": {
+    "python_executable": ".venv/Scripts/python.exe",
+    "pip_freeze": [
+      "PyJWT==2.15.1",
+      "annotated-types==0.8.0",
+      "anyio==4.15.1",
+      "attrs==26.1.0",
+      "cffi==2.1.1",
+      "click==8.5.0",
+      "cryptography==49.0.0",
+      "h11==0.16.0",
+      "httpcore2==2.14.0",
+      "httpx2==2.14.0",
+      "idna==3.20",
+      "jsonschema-specifications==2025.9.1",
+      "jsonschema==4.26.0",
+      "mcp-types==2.2.0",
+      "mcp==2.2.0",
+      "opentelemetry-api==1.45.1",
+      "pic-standard @ git+https://github.com/pic-standard/pic-standard.git@330fdd817ef81d43461ea1787939e0d1cc87d589",
+      "pycparser==3.0",
+      "pydantic==2.13.5",
+      "pydantic_core==2.46.5",
+      "python-multipart==0.0.32",
+      "pywin32==312",
+      "referencing==0.37.0",
+      "rpds-py==2026.9.1",
+      "sse-starlette==3.5.0",
+      "starlette==1.9.0",
+      "truststore==0.10.5",
+      "typing-inspection==0.4.4",
+      "typing_extensions==4.16.0",
+      "uvicorn==0.54.0"
+    ],
+    "pip_freeze_sha256": "38d56c46c6c4165ce971f1fdd960a98d6654cb0c0ef0f3a6366c234055a135c9"
+  },
+  "pic_adapter": {
+    "contract": "retry-recovery-draft-1",
+    "example_commit": "eb7cd4672addc02e1ea80a7a83fadf97d9b0a93e",
+    "pic_sdk_commit": "330fdd817ef81d43461ea1787939e0d1cc87d589",
+    "installed_pic_sdk_commit": "330fdd817ef81d43461ea1787939e0d1cc87d589",
+    "approval_read_timeout_s": 2.0,
+    "verify_timeout_s": 1.5,
+    "diagnostic_digest": "Diagnostic digest for result records: SHA-256 of json.dumps(value,     sort_keys=True, separators=(\",\", \":\"), ensure_ascii=True). Distinct from,     and not a substitute for, PIC's signed canonical (PIC-CJSON) digests.",
+    "worker": {
+      "python": ".venv/Scripts/python.exe",
+      "ready": {
+        "installed_pic_sdk_commit": "330fdd817ef81d43461ea1787939e0d1cc87d589",
+        "pid": 26652,
+        "protocol": 1,
+        "type": "ready"
+      },
+      "starts": 1,
+      "terminations": [],
+      "cleanup_errors": [],
+      "unconfirmed_processes": 0,
+      "verifications": 37
+    }
+  },
   "results": [
     {
       "id": "unguarded_lost_response",
@@ -590,5 +657,2075 @@
     }
   ],
   "passed": 10,
-  "total": 10
+  "total": 10,
+  "approval_results": [
+    {
+      "id": "approval_stable_identity_retry",
+      "matrix": "R01 with real approval",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-1",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "pay_A",
+                  "amount_minor": 4000,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.019071,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.005052,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "retained_operation_verification",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_recovery_without_fresh_approval",
+      "matrix": "R01 recovery with no approval presented",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": null,
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-1",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "pay_A",
+                  "amount_minor": 4000,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004815,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_expired_recovery_allowed",
+      "matrix": "A01",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "expired",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-1",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "pay_A",
+                  "amount_minor": 4000,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.005015,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004875,
+          "decision": "deny",
+          "reason_code": "approval_expired",
+          "checks": {
+            "expected_action": "not_evaluated",
+            "freshness": "fail",
+            "proposal_binding": "unavailable",
+            "signature": "unavailable",
+            "signer_trust": "pass",
+            "workflow_profile": "not_evaluated"
+          },
+          "request_sha256": "1dc9bd0a59dbc41062f1d384907f4de4c002e9955f435096aa51dba0b44f3259",
+          "response_sha256": "66f5b5b46bd9c7d3bdeaf289ab27be1b6f9fb5e2ad5f0af4d32b2334b2130a88",
+          "role": "retained_operation_verification",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_expired_disclosure_denied",
+      "matrix": "A02",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "expired",
+          "context": {
+            "disclose": false
+          },
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004681,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004939,
+          "decision": "deny",
+          "reason_code": "approval_expired",
+          "checks": {
+            "expected_action": "not_evaluated",
+            "freshness": "fail",
+            "proposal_binding": "unavailable",
+            "signature": "unavailable",
+            "signer_trust": "pass",
+            "workflow_profile": "not_evaluated"
+          },
+          "request_sha256": "1dc9bd0a59dbc41062f1d384907f4de4c002e9955f435096aa51dba0b44f3259",
+          "response_sha256": "66f5b5b46bd9c7d3bdeaf289ab27be1b6f9fb5e2ad5f0af4d32b2334b2130a88",
+          "role": "retained_operation_verification",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_revoked_signer_recovery_allowed",
+      "matrix": "A03 candidate policy: revoked signer, disclosure allowed",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "revoked",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-1",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "pay_A",
+                  "amount_minor": 4000,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004383,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004573,
+          "decision": "deny",
+          "reason_code": "signer_revoked",
+          "checks": {
+            "expected_action": "not_evaluated",
+            "freshness": "unavailable",
+            "proposal_binding": "unavailable",
+            "signature": "unavailable",
+            "signer_trust": "fail",
+            "workflow_profile": "not_evaluated"
+          },
+          "request_sha256": "ad04e4eaa0a58ee980cda2ae148bc0cf69d6347e1cebd6996d4feefde5d35bdb",
+          "response_sha256": "80fe21c772f82399a75f8a26cbf80cc091097f20b493068215af644a5e8b2a50",
+          "role": "retained_operation_verification",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_revoked_signer_disclosure_denied",
+      "matrix": "A03 candidate policy: revoked signer, disclosure denied",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "revoked",
+          "context": {
+            "disclose": false
+          },
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.00439,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.005191,
+          "decision": "deny",
+          "reason_code": "signer_revoked",
+          "checks": {
+            "expected_action": "not_evaluated",
+            "freshness": "unavailable",
+            "proposal_binding": "unavailable",
+            "signature": "unavailable",
+            "signer_trust": "fail",
+            "workflow_profile": "not_evaluated"
+          },
+          "request_sha256": "ad04e4eaa0a58ee980cda2ae148bc0cf69d6347e1cebd6996d4feefde5d35bdb",
+          "response_sha256": "80fe21c772f82399a75f8a26cbf80cc091097f20b493068215af644a5e8b2a50",
+          "role": "retained_operation_verification",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_execution_withdrawn_disclosure_allowed",
+      "matrix": "A04",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "valid",
+          "context": {
+            "execute": false
+          },
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-1",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "pay_A",
+                  "amount_minor": 4000,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004474,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004858,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "retained_operation_verification",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_execution_withdrawn_disclosure_denied",
+      "matrix": "A04",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "valid",
+          "context": {
+            "execute": false,
+            "disclose": false
+          },
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004285,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.00473,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "retained_operation_verification",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_other_tenant",
+      "matrix": "A05",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "valid",
+          "context": {
+            "tenant": "tenant-b"
+          },
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004287,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.00465,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "context_rejected_before_approval",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_other_principal",
+      "matrix": "A05",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "valid",
+          "context": {
+            "principal": "principal-b"
+          },
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004282,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004859,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "context_rejected_before_approval",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_changed_args_conflict",
+      "matrix": "A06",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "changed_args",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 5000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "conflict"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004896,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004819,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "1d8021be9e968e395a35a8c0e249b3f9584e5bce008c4d4108739fd8ca7bd4c8",
+          "response_sha256": "93f079d933e9b7563b927041be5d44229b7e8b1495248dc133b4a89d41b98612",
+          "role": "retained_operation_verification",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_tampered_new_operation",
+      "matrix": "A06 tampering control",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "tampered",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-2",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004554,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004655,
+          "decision": "deny",
+          "reason_code": "signature_or_binding_rejected",
+          "checks": {
+            "expected_action": "not_evaluated",
+            "freshness": "unavailable",
+            "proposal_binding": "fail",
+            "signature": "unavailable",
+            "signer_trust": "pass",
+            "workflow_profile": "not_evaluated"
+          },
+          "request_sha256": "23b364e8c7b84676066e5879f05c522a0059f990c68466e23e3be605d35f6fc6",
+          "response_sha256": "4bdb2a8338262fb2a4e57aa2ef40e9e6ca16cf083d804ec0a2822e28cf9a1409",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "approval_not_verified",
+          "operation_id": "operation-2",
+          "reason_code": "signature_or_binding_rejected"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_reissued_recovery",
+      "matrix": "A07",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "reissued",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-1",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "pay_A",
+                  "amount_minor": 4000,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004869,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004807,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "ae35f9ef13a592d2da26017eace3809d1114c9f588b6f07b9358f32e442c3434",
+          "response_sha256": "91b20b8182e1cae782d3b4a629f600f054e3e025dab71dfb38936d110c24dd97",
+          "role": "retained_operation_verification",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_retained_decision_mismatch",
+      "matrix": "A07 negative: different verified decision for a retained operation",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "second_decision",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "conflict"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004377,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004891,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "bb57d32781648b7fae048798af680f7870e1b11402c3352d3cde91533a926cb7",
+          "response_sha256": "9d3e3937da2e0e406fc9118f46ec6f477e70211c87bcd59cc5d09b4d15a32bc9",
+          "role": "retained_operation_verification",
+          "decision_mismatch_observed": true
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "approval_decision_mismatch",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_replay_fresh_operation",
+      "matrix": "replay control (provisional: conflict)",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "timeout",
+            "exception": "MCPError"
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-2",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "conflict"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004393,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.0048,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "decision_already_bound",
+          "operation_id": "operation-2"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_second_decision_new_operation",
+      "matrix": "T04-style positive control",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        4
+      ],
+      "transport_faults": [],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-1",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "pay_A",
+                  "amount_minor": 4000,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "second_decision",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-2",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-2",
+                "operation_id": "operation-2",
+                "args": {
+                  "payment_id": "pay_A",
+                  "amount_minor": 4000,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "provider_effect_count": 2
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004369,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004293,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "bb57d32781648b7fae048798af680f7870e1b11402c3352d3cde91533a926cb7",
+          "response_sha256": "9d3e3937da2e0e406fc9118f46ec6f477e70211c87bcd59cc5d09b4d15a32bc9",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 2,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "reserved",
+          "operation_id": "operation-2"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-2"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_expired_new_effect_denied",
+      "matrix": "new effect under expired approval",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        4
+      ],
+      "transport_faults": [],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "expired",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 0
+        },
+        {
+          "attempt": 2,
+          "approval": "expired",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 0
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004359,
+          "decision": "deny",
+          "reason_code": "approval_expired",
+          "checks": {
+            "expected_action": "not_evaluated",
+            "freshness": "fail",
+            "proposal_binding": "unavailable",
+            "signature": "unavailable",
+            "signer_trust": "pass",
+            "workflow_profile": "not_evaluated"
+          },
+          "request_sha256": "1dc9bd0a59dbc41062f1d384907f4de4c002e9955f435096aa51dba0b44f3259",
+          "response_sha256": "66f5b5b46bd9c7d3bdeaf289ab27be1b6f9fb5e2ad5f0af4d32b2334b2130a88",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004319,
+          "decision": "deny",
+          "reason_code": "approval_expired",
+          "checks": {
+            "expected_action": "not_evaluated",
+            "freshness": "fail",
+            "proposal_binding": "unavailable",
+            "signature": "unavailable",
+            "signer_trust": "pass",
+            "workflow_profile": "not_evaluated"
+          },
+          "request_sha256": "1dc9bd0a59dbc41062f1d384907f4de4c002e9955f435096aa51dba0b44f3259",
+          "response_sha256": "66f5b5b46bd9c7d3bdeaf289ab27be1b6f9fb5e2ad5f0af4d32b2334b2130a88",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 0,
+      "engine_events": [
+        {
+          "event": "approval_not_verified",
+          "operation_id": "operation-1",
+          "reason_code": "approval_expired"
+        },
+        {
+          "event": "approval_not_verified",
+          "operation_id": "operation-1",
+          "reason_code": "approval_expired"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_revoked_new_effect_denied",
+      "matrix": "new effect under revoked signer",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        4
+      ],
+      "transport_faults": [],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "revoked",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 0
+        },
+        {
+          "attempt": 2,
+          "approval": "revoked",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 0
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.004085,
+          "decision": "deny",
+          "reason_code": "signer_revoked",
+          "checks": {
+            "expected_action": "not_evaluated",
+            "freshness": "unavailable",
+            "proposal_binding": "unavailable",
+            "signature": "unavailable",
+            "signer_trust": "fail",
+            "workflow_profile": "not_evaluated"
+          },
+          "request_sha256": "ad04e4eaa0a58ee980cda2ae148bc0cf69d6347e1cebd6996d4feefde5d35bdb",
+          "response_sha256": "80fe21c772f82399a75f8a26cbf80cc091097f20b493068215af644a5e8b2a50",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004052,
+          "decision": "deny",
+          "reason_code": "signer_revoked",
+          "checks": {
+            "expected_action": "not_evaluated",
+            "freshness": "unavailable",
+            "proposal_binding": "unavailable",
+            "signature": "unavailable",
+            "signer_trust": "fail",
+            "workflow_profile": "not_evaluated"
+          },
+          "request_sha256": "ad04e4eaa0a58ee980cda2ae148bc0cf69d6347e1cebd6996d4feefde5d35bdb",
+          "response_sha256": "80fe21c772f82399a75f8a26cbf80cc091097f20b493068215af644a5e8b2a50",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 0,
+      "engine_events": [
+        {
+          "event": "approval_not_verified",
+          "operation_id": "operation-1",
+          "reason_code": "signer_revoked"
+        },
+        {
+          "event": "approval_not_verified",
+          "operation_id": "operation-1",
+          "reason_code": "signer_revoked"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    },
+    {
+      "id": "approval_commit_then_error",
+      "matrix": "R05 with real approval",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        4
+      ],
+      "transport_faults": [],
+      "attempts": [
+        {
+          "attempt": 1,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "execution_error",
+              "outcome": "unknown"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        },
+        {
+          "attempt": 2,
+          "approval": "valid",
+          "context": {},
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "unknown"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "provider_effect_count": 1
+        }
+      ],
+      "adapter_results": [
+        {
+          "attempt": 1,
+          "latency_s": 0.00424,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "admission_check",
+          "decision_mismatch_observed": false
+        },
+        {
+          "attempt": 2,
+          "latency_s": 0.004344,
+          "decision": "allow",
+          "reason_code": null,
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          },
+          "request_sha256": "a72f128fc9930670c6bee8395b45fa420a98330638bf449973be9c2453d8a5c4",
+          "response_sha256": "ccce70b2d8fc9f6b246a1a8eb3807b51414af1feb90cfbfc5e220e8c56cb9646",
+          "role": "retained_operation_verification",
+          "decision_mismatch_observed": false
+        }
+      ],
+      "effect_count": 1,
+      "engine_events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "post_commit_error",
+          "operation_id": "operation-1"
+        }
+      ],
+      "scope": "real MCP memory streams; real pinned PIC approval verification in a worker; synthetic in-process provider/recovery policy; fresh approval is not required for retained recovery; a presented, currently verified decision is checked for consistency"
+    }
+  ],
+  "approval_passed": 19,
+  "approval_total": 19,
+  "pending": {
+    "T01-T03": "pruning and retention: not implemented",
+    "C01": "concurrency: not exercised",
+    "durability": "restart and crash recovery: not exercised"
+  }
 }

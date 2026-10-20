@@ -1,0 +1,2 @@
+# Vendored upstream bytes: never normalise line endings or flag whitespace.
+refund_approval_eb7cd467/** -text -whitespace
