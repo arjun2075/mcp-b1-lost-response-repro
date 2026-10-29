@@ -1,0 +1,20 @@
+test_adyen (test_adapters.AdapterExactness.test_adyen) ... ok
+test_agentkit (test_adapters.AdapterExactness.test_agentkit) ... ok
+test_paypal (test_adapters.AdapterExactness.test_paypal) ... ok
+test_razorpay (test_adapters.AdapterExactness.test_razorpay) ... ok
+test_square (test_adapters.AdapterExactness.test_square) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.010s
+
+OK
+
+adyen: 7 answers compared, 0 answers written by the adapter (not compared)
+
+agentkit: 13 answers compared, 0 answers written by the adapter (not compared)
+
+paypal: 15 answers compared, 0 answers written by the adapter (not compared)
+
+razorpay: 14 answers compared, 0 answers written by the adapter (not compared)
+
+square: 30 answers compared, 0 answers written by the adapter (not compared)

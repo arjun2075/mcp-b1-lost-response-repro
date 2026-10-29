@@ -1,0 +1,2634 @@
+{
+  "python": "3.12.14",
+  "base_pr4_commit": "f01ccb479399798e68a2c4d4ad1ad0ef69e6e1d3",
+  "source_sha256": {
+    "retention.py": "c9bef7c1f176911c1b538605fe868b2cb75f07d3c19874d8992ffaf549e24164",
+    "run_retention_cases.py": "9c76bf0189891f60614fbb1ef9a3eb551434b0c15702f327d9fc42e1f83e5d84",
+    "recovery.py": "20f46b96dc30502c65788407fdf54b9d3f5db693a158906d6d5e8d78797737b1",
+    "run_cases.py": "0fc92931a350c2caeb8a895f803c4356b939fc0fe3967e27b3f6cd493d7552ae",
+    "pic_adapter/verify.py": "e3a498da99b90a6629861e01ecd4fa1e754a38845f7a04b92badebb5f60a4302",
+    "pic_adapter/clock.py": "d05b0d883004f83f933d2c2c05b5c39783b99dbfd0a1f14996fe89c7749cded0",
+    "pic_adapter/client.py": "e6cfb81dda17146521b640177469a0e5417ab9db89d8d20cea30d7c35a7a8092",
+    "pic_adapter/worker.py": "0d94753d2f4524ccf0a35acaec78558df6b73a5ef8b4c22873143c5c9ece8fb7",
+    "pic_adapter/keyrings/trusted.json": "dc8c6e27492398c7ec68cd0d2b4f101eadc73e1d90b0317fa2b795e90fddf172",
+    "pic_adapter/vendor/MANIFEST.json": "f118798f1da10ca258e2a59bd38cd2f2f8b3e590d864a71bfc7cd576781392d6"
+  },
+  "environment": {
+    "python_executable": "../../.venv/bin/python",
+    "pip_freeze": [
+      "PyJWT==2.15.1",
+      "annotated-types==0.8.0",
+      "anyio==4.15.1",
+      "attrs==26.1.0",
+      "cffi==2.1.1",
+      "click==8.5.0",
+      "cryptography==49.0.0",
+      "h11==0.16.0",
+      "httpcore2==2.16.0",
+      "httpx2==2.16.0",
+      "idna==3.20",
+      "jsonschema-specifications==2025.9.1",
+      "jsonschema==4.26.0",
+      "mcp-types==2.2.0",
+      "mcp==2.2.0",
+      "opentelemetry-api==1.45.1",
+      "pic-standard @ git+https://github.com/pic-standard/pic-standard.git@330fdd817ef81d43461ea1787939e0d1cc87d589",
+      "pycparser==3.0",
+      "pydantic==2.13.5",
+      "pydantic_core==2.46.5",
+      "python-multipart==0.0.32",
+      "referencing==0.37.0",
+      "rpds-py==2026.9.1",
+      "sse-starlette==3.6.0",
+      "starlette==1.10.0",
+      "truststore==0.10.5",
+      "typing-inspection==0.4.4",
+      "typing_extensions==4.16.0",
+      "uvicorn==0.54.0"
+    ],
+    "pip_freeze_sha256": "81edb39dc9ee2c48393b5b8ac0b40e784be8f3cddd6c9a8b6d21325d9fabc249"
+  },
+  "worker": {
+    "starts": 1,
+    "verifications": 28,
+    "ready": {
+      "installed_pic_sdk_commit": "330fdd817ef81d43461ea1787939e0d1cc87d589",
+      "pid": 6,
+      "protocol": 1,
+      "type": "ready"
+    }
+  },
+  "scope": "real MCP and pinned PIC; synthetic sequential retention and provider; scripted client",
+  "external_mapping": {
+    "repository": "https://github.com/terminalstate/double-take",
+    "commit": "3bfd494293e70cb5a4eb068e005d76739fd760aa",
+    "trace": "runs-l2/run.jsonl",
+    "line": 142,
+    "selector": {
+      "scenario": "paypal_refund",
+      "model": "claude-sonnet-5",
+      "prompt": "plain",
+      "trial": 2
+    }
+  },
+  "passed": 17,
+  "total": 17,
+  "results": [
+    {
+      "id": "T01_receipt_pruned_same_approval",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "unknown",
+              "reason": "receipt_pruned"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 172800,
+            "receipt_records": 0,
+            "tombstones": 1,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "redispatch_refused_tombstone",
+              "operation_id": "operation-1"
+            }
+          ]
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-31T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "receipt_pruned_tombstone_retained",
+          "operation_id": "operation-1",
+          "at": 172800
+        },
+        {
+          "event": "redispatch_refused_tombstone",
+          "operation_id": "operation-1"
+        }
+      ],
+      "final_store": {
+        "clock": 172800,
+        "receipt_records": 0,
+        "tombstones": 1,
+        "decision_bindings": 1,
+        "admission_closed": false,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1
+    },
+    {
+      "id": "T01_expired_approval_tombstone",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "expired",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "unknown",
+              "reason": "receipt_pruned"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 172800,
+            "receipt_records": 0,
+            "tombstones": 1,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "redispatch_refused_tombstone",
+              "operation_id": "operation-1"
+            }
+          ]
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "deny",
+          "reason_code": "approval_expired",
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-31T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "not_evaluated",
+            "freshness": "fail",
+            "proposal_binding": "unavailable",
+            "signature": "unavailable",
+            "signer_trust": "pass",
+            "workflow_profile": "not_evaluated"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "receipt_pruned_tombstone_retained",
+          "operation_id": "operation-1",
+          "at": 172800
+        },
+        {
+          "event": "redispatch_refused_tombstone",
+          "operation_id": "operation-1"
+        }
+      ],
+      "final_store": {
+        "clock": 172800,
+        "receipt_records": 0,
+        "tombstones": 1,
+        "decision_bindings": 1,
+        "admission_closed": false,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1
+    },
+    {
+      "id": "T02_reissued_approval_tombstone",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "reissued",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "unknown",
+              "reason": "receipt_pruned"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 172800,
+            "receipt_records": 0,
+            "tombstones": 1,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "redispatch_refused_tombstone",
+              "operation_id": "operation-1"
+            }
+          ]
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-31T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "receipt_pruned_tombstone_retained",
+          "operation_id": "operation-1",
+          "at": 172800
+        },
+        {
+          "event": "redispatch_refused_tombstone",
+          "operation_id": "operation-1"
+        }
+      ],
+      "final_store": {
+        "clock": 172800,
+        "receipt_records": 0,
+        "tombstones": 1,
+        "decision_bindings": 1,
+        "admission_closed": false,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1
+    },
+    {
+      "id": "T02_new_decision_same_operation",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "second_decision",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "conflict"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 172800,
+            "receipt_records": 0,
+            "tombstones": 1,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": []
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-31T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "receipt_pruned_tombstone_retained",
+          "operation_id": "operation-1",
+          "at": 172800
+        }
+      ],
+      "final_store": {
+        "clock": 172800,
+        "receipt_records": 0,
+        "tombstones": 1,
+        "decision_bindings": 1,
+        "admission_closed": false,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1
+    },
+    {
+      "id": "T03_changed_claimed_creation_time",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR",
+            "claimed_created_at": 172800
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "unknown",
+              "reason": "receipt_pruned"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 172800,
+            "receipt_records": 0,
+            "tombstones": 1,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "redispatch_refused_tombstone",
+              "operation_id": "operation-1"
+            }
+          ]
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-31T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "receipt_pruned_tombstone_retained",
+          "operation_id": "operation-1",
+          "at": 172800
+        },
+        {
+          "event": "redispatch_refused_tombstone",
+          "operation_id": "operation-1"
+        }
+      ],
+      "final_store": {
+        "clock": 172800,
+        "receipt_records": 0,
+        "tombstones": 1,
+        "decision_bindings": 1,
+        "admission_closed": false,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1
+    },
+    {
+      "id": "T01_disclosure_denied",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 172800,
+            "receipt_records": 0,
+            "tombstones": 1,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": []
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-31T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "receipt_pruned_tombstone_retained",
+          "operation_id": "operation-1",
+          "at": 172800
+        }
+      ],
+      "final_store": {
+        "clock": 172800,
+        "receipt_records": 0,
+        "tombstones": 1,
+        "decision_bindings": 1,
+        "admission_closed": false,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1
+    },
+    {
+      "id": "T01_other_principal",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "denied"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 172800,
+            "receipt_records": 0,
+            "tombstones": 1,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": []
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-31T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "receipt_pruned_tombstone_retained",
+          "operation_id": "operation-1",
+          "at": 172800
+        }
+      ],
+      "final_store": {
+        "clock": 172800,
+        "receipt_records": 0,
+        "tombstones": 1,
+        "decision_bindings": 1,
+        "admission_closed": false,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1
+    },
+    {
+      "id": "T01_admission_evidence_expired",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "unknown",
+              "reason": "admission_closed"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 604800,
+            "receipt_records": 0,
+            "tombstones": 0,
+            "decision_bindings": 0,
+            "admission_closed": true,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "admission_refused_after_expiry",
+              "operation_id": "operation-1"
+            }
+          ]
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-11-05T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "admission_evidence_expired",
+          "operation_id": "operation-1",
+          "at": 604800,
+          "new_admission": "closed"
+        },
+        {
+          "event": "admission_refused_after_expiry",
+          "operation_id": "operation-1"
+        }
+      ],
+      "final_store": {
+        "clock": 604800,
+        "receipt_records": 0,
+        "tombstones": 0,
+        "decision_bindings": 0,
+        "admission_closed": true,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1
+    },
+    {
+      "id": "T02_reissued_after_admission_expiry",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "reissued",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "unknown",
+              "reason": "admission_closed"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 604800,
+            "receipt_records": 0,
+            "tombstones": 0,
+            "decision_bindings": 0,
+            "admission_closed": true,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "admission_refused_after_expiry",
+              "operation_id": "operation-1"
+            }
+          ]
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-11-05T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "admission_evidence_expired",
+          "operation_id": "operation-1",
+          "at": 604800,
+          "new_admission": "closed"
+        },
+        {
+          "event": "admission_refused_after_expiry",
+          "operation_id": "operation-1"
+        }
+      ],
+      "final_store": {
+        "clock": 604800,
+        "receipt_records": 0,
+        "tombstones": 0,
+        "decision_bindings": 0,
+        "admission_closed": true,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1
+    },
+    {
+      "id": "T03_timestamp_after_admission_expiry",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR",
+            "claimed_created_at": 604800
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "unknown",
+              "reason": "admission_closed"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 604800,
+            "receipt_records": 0,
+            "tombstones": 0,
+            "decision_bindings": 0,
+            "admission_closed": true,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "admission_refused_after_expiry",
+              "operation_id": "operation-1"
+            }
+          ]
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-11-05T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "admission_evidence_expired",
+          "operation_id": "operation-1",
+          "at": 604800,
+          "new_admission": "closed"
+        },
+        {
+          "event": "admission_refused_after_expiry",
+          "operation_id": "operation-1"
+        }
+      ],
+      "final_store": {
+        "clock": 604800,
+        "receipt_records": 0,
+        "tombstones": 0,
+        "decision_bindings": 0,
+        "admission_closed": true,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1
+    },
+    {
+      "id": "expiry_refuses_even_new_identity",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-2",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "second_decision",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "unknown",
+              "reason": "admission_closed"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 604800,
+            "receipt_records": 0,
+            "tombstones": 0,
+            "decision_bindings": 0,
+            "admission_closed": true,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "admission_refused_after_expiry",
+              "operation_id": "operation-2"
+            }
+          ]
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-11-05T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "admission_evidence_expired",
+          "operation_id": "operation-1",
+          "at": 604800,
+          "new_admission": "closed"
+        },
+        {
+          "event": "admission_refused_after_expiry",
+          "operation_id": "operation-2"
+        }
+      ],
+      "final_store": {
+        "clock": 604800,
+        "receipt_records": 0,
+        "tombstones": 0,
+        "decision_bindings": 0,
+        "admission_closed": true,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1
+    },
+    {
+      "id": "T04_new_operation_while_tombstone_retained",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-2",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "second_decision",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-2",
+                "operation_id": "operation-2",
+                "args": {
+                  "payment_id": "pay_A",
+                  "amount_minor": 4000,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "dispatch": "performed",
+          "store": {
+            "clock": 172800,
+            "receipt_records": 1,
+            "tombstones": 1,
+            "decision_bindings": 2,
+            "admission_closed": false,
+            "provider_effect_count": 2
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-2"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-2"
+            }
+          ]
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-31T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "receipt_pruned_tombstone_retained",
+          "operation_id": "operation-1",
+          "at": 172800
+        },
+        {
+          "event": "reserved",
+          "operation_id": "operation-2"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-2"
+        }
+      ],
+      "final_store": {
+        "clock": 172800,
+        "receipt_records": 1,
+        "tombstones": 1,
+        "decision_bindings": 2,
+        "admission_closed": false,
+        "provider_effect_count": 2
+      },
+      "effect_count": 2
+    },
+    {
+      "id": "before_receipt_horizon",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-1",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "pay_A",
+                  "amount_minor": 4000,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 86399,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": []
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T23:59:59Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "final_store": {
+        "clock": 86399,
+        "receipt_records": 1,
+        "tombstones": 0,
+        "decision_bindings": 1,
+        "admission_closed": false,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1
+    },
+    {
+      "id": "at_receipt_horizon",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "id": 2
+        }
+      ],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "timeout"
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": "valid",
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "unknown",
+              "reason": "receipt_pruned"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 86400,
+            "receipt_records": 0,
+            "tombstones": 1,
+            "decision_bindings": 1,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "redispatch_refused_tombstone",
+              "operation_id": "operation-1"
+            }
+          ]
+        }
+      ],
+      "verifications": [
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-29T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        },
+        {
+          "decision": "allow",
+          "reason_code": null,
+          "verification_context": {
+            "keyring_fixture": "trusted",
+            "profile": "refund-approval-v1",
+            "clock": "2026-10-30T00:00:00Z"
+          },
+          "checks": {
+            "expected_action": "pass",
+            "freshness": "pass",
+            "proposal_binding": "pass",
+            "signature": "pass",
+            "signer_trust": "pass",
+            "workflow_profile": "pass"
+          }
+        }
+      ],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "receipt_pruned_tombstone_retained",
+          "operation_id": "operation-1",
+          "at": 86400
+        },
+        {
+          "event": "redispatch_refused_tombstone",
+          "operation_id": "operation-1"
+        }
+      ],
+      "final_store": {
+        "clock": 86400,
+        "receipt_records": 0,
+        "tombstones": 1,
+        "decision_bindings": 1,
+        "admission_closed": false,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1
+    },
+    {
+      "id": "negative_read_retained_unknown",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        4,
+        5
+      ],
+      "faults": [],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": null,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "execution_error",
+              "outcome": "unknown"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 0,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "post_commit_error",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "list_transactions",
+          "arguments": {
+            "transaction_id": "pay_A"
+          },
+          "approval": null,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "found": true,
+              "transaction_details": [
+                {
+                  "transaction_info": {
+                    "transaction_id": "pay_A",
+                    "transaction_event_code": "T0006"
+                  }
+                }
+              ],
+              "total_items": 1
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 0,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": []
+        },
+        {
+          "step": 3,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": null,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "unknown"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 0,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": []
+        }
+      ],
+      "verifications": [],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "post_commit_error",
+          "operation_id": "operation-1"
+        }
+      ],
+      "final_store": {
+        "clock": 0,
+        "receipt_records": 1,
+        "tombstones": 0,
+        "decision_bindings": 0,
+        "admission_closed": false,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1,
+      "external_mapping": {
+        "repository": "https://github.com/terminalstate/double-take",
+        "commit": "3bfd494293e70cb5a4eb068e005d76739fd760aa",
+        "trace": "runs-l2/run.jsonl",
+        "line": 142,
+        "selector": {
+          "scenario": "paypal_refund",
+          "model": "claude-sonnet-5",
+          "prompt": "plain",
+          "trial": 2
+        }
+      }
+    },
+    {
+      "id": "negative_read_pruned_receipt",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        4,
+        5
+      ],
+      "faults": [],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": null,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "execution_error",
+              "outcome": "unknown"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "clock": 0,
+            "receipt_records": 1,
+            "tombstones": 0,
+            "decision_bindings": 0,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "post_commit_error",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "list_transactions",
+          "arguments": {
+            "transaction_id": "pay_A"
+          },
+          "approval": null,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "found": true,
+              "transaction_details": [
+                {
+                  "transaction_info": {
+                    "transaction_id": "pay_A",
+                    "transaction_event_code": "T0006"
+                  }
+                }
+              ],
+              "total_items": 1
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 172800,
+            "receipt_records": 0,
+            "tombstones": 1,
+            "decision_bindings": 0,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": []
+        },
+        {
+          "step": 3,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": null,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "unknown",
+              "reason": "receipt_pruned"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "clock": 172800,
+            "receipt_records": 0,
+            "tombstones": 1,
+            "decision_bindings": 0,
+            "admission_closed": false,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "redispatch_refused_tombstone",
+              "operation_id": "operation-1"
+            }
+          ]
+        }
+      ],
+      "verifications": [],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "post_commit_error",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "receipt_pruned_tombstone_retained",
+          "operation_id": "operation-1",
+          "at": 172800
+        },
+        {
+          "event": "redispatch_refused_tombstone",
+          "operation_id": "operation-1"
+        }
+      ],
+      "final_store": {
+        "clock": 172800,
+        "receipt_records": 0,
+        "tombstones": 1,
+        "decision_bindings": 0,
+        "admission_closed": false,
+        "provider_effect_count": 1
+      },
+      "effect_count": 1,
+      "external_mapping": {
+        "repository": "https://github.com/terminalstate/double-take",
+        "commit": "3bfd494293e70cb5a4eb068e005d76739fd760aa",
+        "trace": "runs-l2/run.jsonl",
+        "line": 142,
+        "selector": {
+          "scenario": "paypal_refund",
+          "model": "claude-sonnet-5",
+          "prompt": "plain",
+          "trial": 2
+        }
+      }
+    },
+    {
+      "id": "negative_read_unsafe_eviction_control",
+      "passed": true,
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        4,
+        5
+      ],
+      "faults": [],
+      "observations": [
+        {
+          "step": 1,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": null,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "execution_error",
+              "outcome": "unknown"
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "performed",
+          "store": {
+            "receipt_records": 0,
+            "provider_effect_count": 1
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "post_commit_error",
+              "operation_id": "operation-1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "tool": "list_transactions",
+          "arguments": {
+            "transaction_id": "pay_A"
+          },
+          "approval": null,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "found": true,
+              "transaction_details": [
+                {
+                  "transaction_info": {
+                    "transaction_id": "pay_A",
+                    "transaction_event_code": "T0006"
+                  }
+                }
+              ],
+              "total_items": 1
+            }
+          },
+          "client_reported_outcome": "unknown",
+          "dispatch": "refused_or_recovered",
+          "store": {
+            "receipt_records": 0,
+            "provider_effect_count": 1
+          },
+          "events": []
+        },
+        {
+          "step": 3,
+          "tool": "refund",
+          "arguments": {
+            "operation_id": "operation-1",
+            "payment_id": "pay_A",
+            "amount_minor": 4000,
+            "currency": "EUR"
+          },
+          "approval": null,
+          "observation": {
+            "kind": "response",
+            "payload": {
+              "status": "completed",
+              "receipt": {
+                "receipt_marker": "fixture-receipt-2",
+                "operation_id": "operation-1",
+                "args": {
+                  "payment_id": "pay_A",
+                  "amount_minor": 4000,
+                  "currency": "EUR"
+                }
+              }
+            }
+          },
+          "client_reported_outcome": "confirmed",
+          "dispatch": "performed",
+          "store": {
+            "receipt_records": 1,
+            "provider_effect_count": 2
+          },
+          "events": [
+            {
+              "event": "reserved",
+              "operation_id": "operation-1"
+            },
+            {
+              "event": "effect_committed",
+              "operation_id": "operation-1"
+            }
+          ]
+        }
+      ],
+      "verifications": [],
+      "events": [
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "post_commit_error",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "reserved",
+          "operation_id": "operation-1"
+        },
+        {
+          "event": "effect_committed",
+          "operation_id": "operation-1"
+        }
+      ],
+      "final_store": {
+        "receipt_records": 1,
+        "provider_effect_count": 2
+      },
+      "effect_count": 2,
+      "external_mapping": {
+        "repository": "https://github.com/terminalstate/double-take",
+        "commit": "3bfd494293e70cb5a4eb068e005d76739fd760aa",
+        "trace": "runs-l2/run.jsonl",
+        "line": 142,
+        "selector": {
+          "scenario": "paypal_refund",
+          "model": "claude-sonnet-5",
+          "prompt": "plain",
+          "trial": 2
+        }
+      }
+    }
+  ]
+}
