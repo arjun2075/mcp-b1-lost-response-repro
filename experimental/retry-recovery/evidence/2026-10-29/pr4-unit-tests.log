@@ -1,0 +1,181 @@
+test_approved_action_must_match_requested_action_type_strictly (test_recovery.ApprovalModeTests.test_approved_action_must_match_requested_action_type_strictly) ... ok
+test_denied_disclosure_masks_retained_conflicts (test_recovery.ApprovalModeTests.test_denied_disclosure_masks_retained_conflicts) ... ok
+test_execution_permission_still_required_with_valid_approval (test_recovery.ApprovalModeTests.test_execution_permission_still_required_with_valid_approval) ... ok
+test_fixture_comparison_is_type_strict (test_recovery.ApprovalModeTests.test_fixture_comparison_is_type_strict) ... ok
+test_invalid_ids_rejected_before_any_record_or_effect (test_recovery.ApprovalModeTests.test_invalid_ids_rejected_before_any_record_or_effect) ... ok
+test_malformed_synthetic_approval_is_not_verified_and_does_not_raise (test_recovery.ApprovalModeTests.test_malformed_synthetic_approval_is_not_verified_and_does_not_raise) ... ok
+test_new_decision_with_identical_arguments_is_a_new_operation (test_recovery.ApprovalModeTests.test_new_decision_with_identical_arguments_is_a_new_operation) ... ok
+test_original_mode_keeps_conflict_before_disclosure (test_recovery.ApprovalModeTests.test_original_mode_keeps_conflict_before_disclosure) ... ok
+test_other_context_cannot_recover_or_reuse_decision (test_recovery.ApprovalModeTests.test_other_context_cannot_recover_or_reuse_decision) ... ok
+test_reissued_approval_recovers_same_operation (test_recovery.ApprovalModeTests.test_reissued_approval_recovers_same_operation) ... ok
+test_reservation_and_decision_survive_post_commit_error (test_recovery.ApprovalModeTests.test_reservation_and_decision_survive_post_commit_error) ... ok
+test_retained_recovery_ignores_expired_or_revoked_approval (test_recovery.ApprovalModeTests.test_retained_recovery_ignores_expired_or_revoked_approval) ... ok
+test_same_decision_with_fresh_operation_id_adds_no_effect (test_recovery.ApprovalModeTests.test_same_decision_with_fresh_operation_id_adds_no_effect) ... ok
+test_unsupported_mode_combinations_rejected (test_recovery.ApprovalModeTests.test_unsupported_mode_combinations_rejected) ... ok
+test_unverified_approval_cannot_create_an_effect (test_recovery.ApprovalModeTests.test_unverified_approval_cannot_create_an_effect) ... ok
+test_verified_approval_executes_once_and_binds_decision (test_recovery.ApprovalModeTests.test_verified_approval_executes_once_and_binds_decision) ... ok
+test_empty_success_is_not_confirmation (test_recovery.RecoveryTests.test_empty_success_is_not_confirmation) ... ok
+test_error_after_commit_is_unknown_and_does_not_retry (test_recovery.RecoveryTests.test_error_after_commit_is_unknown_and_does_not_retry) ... ok
+test_invalid_amounts_never_dispatch (test_recovery.RecoveryTests.test_invalid_amounts_never_dispatch) ... ok
+test_negative_readback_cannot_resolve_inflight_operation (test_recovery.RecoveryTests.test_negative_readback_cannot_resolve_inflight_operation) ... ok
+test_principal_isolation (test_recovery.RecoveryTests.test_principal_isolation) ... ok
+test_replayed_receipt_cannot_mutate_provider_or_store (test_recovery.RecoveryTests.test_replayed_receipt_cannot_mutate_provider_or_store) ... ok
+test_revoke_new_execution_still_recognizes_prior_operation (test_recovery.RecoveryTests.test_revoke_new_execution_still_recognizes_prior_operation) ... ok
+test_unknown_reservation_does_not_execute (test_recovery.RecoveryTests.test_unknown_reservation_does_not_execute) ... ok
+test_blocked_send_times_out (test_pic_adapter.ClientFailureTests.test_blocked_send_times_out) ... ok
+test_cancellation_then_healthy_replacement (test_pic_adapter.ClientFailureTests.test_cancellation_then_healthy_replacement) ... ok
+test_cleanup_exceptions_during_cancellation_do_not_mask_it (test_pic_adapter.ClientFailureTests.test_cleanup_exceptions_during_cancellation_do_not_mask_it) ... ok
+test_crash_is_unavailable (test_pic_adapter.ClientFailureTests.test_crash_is_unavailable) ... ok
+test_malformed_reply_then_healthy_replacement (test_pic_adapter.ClientFailureTests.test_malformed_reply_then_healthy_replacement) ... ok
+test_mismatched_request_id_is_unavailable (test_pic_adapter.ClientFailureTests.test_mismatched_request_id_is_unavailable) ... ok
+test_missing_interpreter_is_unavailable (test_pic_adapter.ClientFailureTests.test_missing_interpreter_is_unavailable) ... ok
+test_refused_startup_and_failed_first_health (test_pic_adapter.ClientFailureTests.test_refused_startup_and_failed_first_health) ... ok
+test_timeout_then_healthy_replacement (test_pic_adapter.ClientFailureTests.test_timeout_then_healthy_replacement) ... ok
+test_keyring_statuses (test_pic_adapter.FixtureTests.test_keyring_statuses) ... ok
+test_trusted_keyring_matches_vendored_example (test_pic_adapter.FixtureTests.test_trusted_keyring_matches_vendored_example) ... ok
+test_vendor_manifest_intact (test_pic_adapter.FixtureTests.test_vendor_manifest_intact) ... ok
+test_clock_outside_worker_is_rejected (test_pic_adapter.InProcessGuardTests.test_clock_outside_worker_is_rejected) ... ok
+test_vendored_example_not_importable_here (test_pic_adapter.InProcessGuardTests.test_vendored_example_not_importable_here) ... ok
+test_injected_exception_under_clock_restores_clock (test_pic_adapter.InWorkerProcessTests.test_injected_exception_under_clock_restores_clock) ... ok
+test_sdk_pin_mismatch_is_error (test_pic_adapter.InWorkerProcessTests.test_sdk_pin_mismatch_is_error) ... ok
+test_simulated_internal_error_is_verifier_error (test_pic_adapter.InWorkerProcessTests.test_simulated_internal_error_is_verifier_error) ... ok
+test_verification_never_calls_dispatch (test_pic_adapter.InWorkerProcessTests.test_verification_never_calls_dispatch) ... ok
+test_allow_requires_all_pass_and_null_reason (test_pic_adapter.ResponseValidationTests.test_allow_requires_all_pass_and_null_reason) ... ok
+test_baselines_are_valid (test_pic_adapter.ResponseValidationTests.test_baselines_are_valid) ... ok
+test_incomplete_allowed_action_arguments_rejected (test_pic_adapter.ResponseValidationTests.test_incomplete_allowed_action_arguments_rejected) ... ok
+test_malformed_reason_codes_rejected_without_raising (test_pic_adapter.ResponseValidationTests.test_malformed_reason_codes_rejected_without_raising) ... ok
+test_structure_rejections (test_pic_adapter.ResponseValidationTests.test_structure_rejections) ... ok
+test_all_cases_used_one_worker_without_replacement (test_pic_adapter.WorkerAcceptanceTests.test_all_cases_used_one_worker_without_replacement) ... ok
+test_attestation_expiry_boundary (test_pic_adapter.WorkerAcceptanceTests.test_attestation_expiry_boundary) ... ok
+test_boolean_expected_amount_is_malformed_input (test_pic_adapter.WorkerAcceptanceTests.test_boolean_expected_amount_is_malformed_input) ... ok
+test_clock_rejections (test_pic_adapter.WorkerAcceptanceTests.test_clock_rejections) ... ok
+test_duplicate_evidence_id_withholds_stage_attribution (test_pic_adapter.WorkerAcceptanceTests.test_duplicate_evidence_id_withholds_stage_attribution) ... ok
+test_every_diagnostic_pattern_was_exercised (test_pic_adapter.WorkerAcceptanceTests.test_every_diagnostic_pattern_was_exercised) ... ok
+test_expected_action_mismatch (test_pic_adapter.WorkerAcceptanceTests.test_expected_action_mismatch) ... ok
+test_forged_signature_fails_signature (test_pic_adapter.WorkerAcceptanceTests.test_forged_signature_fails_signature) ... ok
+test_harness_process_never_loaded_vendored_names (test_pic_adapter.WorkerAcceptanceTests.test_harness_process_never_loaded_vendored_names) ... ok
+test_key_expiry_boundary (test_pic_adapter.WorkerAcceptanceTests.test_key_expiry_boundary) ... ok
+test_malformed_requests (test_pic_adapter.WorkerAcceptanceTests.test_malformed_requests) ... ok
+test_missing_expiry_is_profile_rejection (test_pic_adapter.WorkerAcceptanceTests.test_missing_expiry_is_profile_rejection) ... ok
+test_profile_rejects_other_tool (test_pic_adapter.WorkerAcceptanceTests.test_profile_rejects_other_tool) ... ok
+test_real_verifier_failed_is_proposal_rejection (test_pic_adapter.WorkerAcceptanceTests.test_real_verifier_failed_is_proposal_rejection) ... ok
+test_reissued_approval_reports_new_reference (test_pic_adapter.WorkerAcceptanceTests.test_reissued_approval_reports_new_reference) ... ok
+test_rejected_input_values_never_echoed (test_pic_adapter.WorkerAcceptanceTests.test_rejected_input_values_never_echoed) ... ok
+test_revoked_and_untrusted_signers (test_pic_adapter.WorkerAcceptanceTests.test_revoked_and_untrusted_signers) ... ok
+test_signed_binding_tampering_fails_binding (test_pic_adapter.WorkerAcceptanceTests.test_signed_binding_tampering_fails_binding) ... ok
+test_valid_proposal_allows (test_pic_adapter.WorkerAcceptanceTests.test_valid_proposal_allows) ... ok
+test_changed_file_rejected (test_run_vendor_baseline.ManifestTests.test_changed_file_rejected) ... ok
+test_duplicate_path_rejected (test_run_vendor_baseline.ManifestTests.test_duplicate_path_rejected) ... ok
+test_extra_file_rejected (test_run_vendor_baseline.ManifestTests.test_extra_file_rejected) ... ok
+test_fake_manifest_is_valid (test_run_vendor_baseline.ManifestTests.test_fake_manifest_is_valid) ... ok
+test_missing_pin_rejected (test_run_vendor_baseline.ManifestTests.test_missing_pin_rejected) ... ok
+test_non_object_manifest_rejected (test_run_vendor_baseline.ManifestTests.test_non_object_manifest_rejected) ... ok
+test_real_vendored_manifest_is_intact (test_run_vendor_baseline.ManifestTests.test_real_vendored_manifest_is_intact) ... ok
+test_symlink_rejected (test_run_vendor_baseline.ManifestTests.test_symlink_rejected) ... ok
+test_unsafe_paths_rejected (test_run_vendor_baseline.ManifestTests.test_unsafe_paths_rejected) ... ok
+test_unsupported_version_rejected (test_run_vendor_baseline.ManifestTests.test_unsupported_version_rejected) ... ok
+test_declared_commit_differs_from_pin (test_run_vendor_baseline.ResultValidationTests.test_declared_commit_differs_from_pin) ... ok
+test_duplicate_case_id_rejected (test_run_vendor_baseline.ResultValidationTests.test_duplicate_case_id_rejected) ... ok
+test_duplicate_probe_rejected (test_run_vendor_baseline.ResultValidationTests.test_duplicate_probe_rejected) ... ok
+test_extra_malformed_probe_entry_rejected (test_run_vendor_baseline.ResultValidationTests.test_extra_malformed_probe_entry_rejected) ... ok
+test_failed_probe_rejected (test_run_vendor_baseline.ResultValidationTests.test_failed_probe_rejected) ... ok
+test_failed_suite_integrity_rejected (test_run_vendor_baseline.ResultValidationTests.test_failed_suite_integrity_rejected) ... ok
+test_good_results_pass (test_run_vendor_baseline.ResultValidationTests.test_good_results_pass) ... ok
+test_installed_commit_differs_from_pin (test_run_vendor_baseline.ResultValidationTests.test_installed_commit_differs_from_pin) ... ok
+test_malformed_case_entry_rejected (test_run_vendor_baseline.ResultValidationTests.test_malformed_case_entry_rejected) ... ok
+test_missing_case_id_rejected (test_run_vendor_baseline.ResultValidationTests.test_missing_case_id_rejected) ... ok
+test_missing_probe_rejected (test_run_vendor_baseline.ResultValidationTests.test_missing_probe_rejected) ... ok
+test_no_probes_rejected (test_run_vendor_baseline.ResultValidationTests.test_no_probes_rejected) ... ok
+test_non_list_cases_rejected (test_run_vendor_baseline.ResultValidationTests.test_non_list_cases_rejected) ... ok
+test_non_list_probes_rejected (test_run_vendor_baseline.ResultValidationTests.test_non_list_probes_rejected) ... ok
+test_non_object_results_rejected (test_run_vendor_baseline.ResultValidationTests.test_non_object_results_rejected) ... ok
+test_truthy_non_boolean_match_rejected (test_run_vendor_baseline.ResultValidationTests.test_truthy_non_boolean_match_rejected) ... ok
+test_unexpected_case_id_rejected (test_run_vendor_baseline.ResultValidationTests.test_unexpected_case_id_rejected) ... ok
+test_unmatched_case_rejected (test_run_vendor_baseline.ResultValidationTests.test_unmatched_case_rejected) ... ok
+test_unverified_environment_rejected (test_run_vendor_baseline.ResultValidationTests.test_unverified_environment_rejected) ... ok
+test_final_manifest_error_preserves_restoration_result (test_run_vendor_baseline.RunTests.test_final_manifest_error_preserves_restoration_result) ... ok
+test_good_run_passes (test_run_vendor_baseline.RunTests.test_good_run_passes) ... ok
+test_restoration_error_does_not_skip_manifest_check (test_run_vendor_baseline.RunTests.test_restoration_error_does_not_skip_manifest_check) ... self-check environment must be recreated: /tmp/rvb-test-k24poo49/self
+ok
+test_self_check_timeout_marks_restoration_unverified (test_run_vendor_baseline.RunTests.test_self_check_timeout_marks_restoration_unverified) ... self-check environment must be recreated: /tmp/rvb-test-h8mozd1u/self
+work tree retained, not deleted: /tmp/pic-vendor-mowcby1o
+ok
+test_stale_results_not_archived (test_run_vendor_baseline.RunTests.test_stale_results_not_archived) ... ok
+test_subprocess_failure_reported (test_run_vendor_baseline.RunTests.test_subprocess_failure_reported) ... ok
+test_test_cases_timeout_stops_run (test_run_vendor_baseline.RunTests.test_test_cases_timeout_stops_run) ... work tree retained, not deleted: /tmp/pic-vendor-n3kz6qmj
+ok
+test_isolated_environments_accepted (test_run_vendor_baseline.SetupTests.test_isolated_environments_accepted) ... ok
+test_output_inside_vendor_rejected_before_probing (test_run_vendor_baseline.SetupTests.test_output_inside_vendor_rejected_before_probing) ... [SETUP FAIL]
+  --output-dir is inside the vendor tree: /tmp/rvb-test-y1tpah0u/vendor/fake_vendor/out
+ok
+test_same_prefix_rejected (test_run_vendor_baseline.SetupTests.test_same_prefix_rejected) ... ok
+test_shared_installation_rejected (test_run_vendor_baseline.SetupTests.test_shared_installation_rejected) ... ok
+test_timeout_must_be_positive_finite (test_run_vendor_baseline.SetupTests.test_timeout_must_be_positive_finite) ... ok
+test_interruption_terminates_tree_and_reraises (test_run_vendor_baseline.TerminationTests.test_interruption_terminates_tree_and_reraises) ... ok
+test_nonzero_taskkill_triggers_direct_kill (test_run_vendor_baseline.TerminationTests.test_nonzero_taskkill_triggers_direct_kill) ... ok
+test_successful_taskkill_needs_no_fallback (test_run_vendor_baseline.TerminationTests.test_successful_taskkill_needs_no_fallback) ... ok
+test_taskkill_timeout_triggers_direct_kill (test_run_vendor_baseline.TerminationTests.test_taskkill_timeout_triggers_direct_kill) ... ok
+test_refuses_under_dash_o (test_run_cases.OptimizedModeRefusalTests.test_refuses_under_dash_o) ... ok
+test_refuses_under_pythonoptimize (test_run_cases.OptimizedModeRefusalTests.test_refuses_under_pythonoptimize) ... ok
+
+----------------------------------------------------------------------
+Ran 113 tests in 11.106s
+
+OK
+[OK] test_cases exit 0 (observed: 0)
+[OK] case ids equal pinned expectations (observed: {'entries': 22, 'duplicates': [], 'missing': [], 'unexpected': []})
+[OK] every case matches (observed: [])
+[OK] integrity probes are exactly the expected two, all ok (observed: {'entries': 2, 'names': ['premature_tool_call', 'wrong_args_dispatch'], 'not_ok': []})
+[OK] environment verified at pin (observed: {'status': 'verified', 'declared': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'installed': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'})
+[OK] self_check exit 0 (observed: 0)
+[OK] self-check outcomes are exactly the expected seven, none failed (observed: {'ok': ['coverage: dropped last expectation', 'coverage: duplicate id', 'coverage: empty cases list', 'environment: dir_info (no vcs_info)', 'environment: direct_url.json missing', 'environment: wrong commit_id', 'normal run after self-check'], 'failed': []})
+[OK] self-check environment metadata restored (observed: restored)
+[FAIL] manifest intact after run (observed: ['manifest verification raised RuntimeError: disk gone'])
+output: /tmp/rvb-test-aq3tq8xt/out/20261029T144206Z-j5g7mr55
+[OK] test_cases exit 0 (observed: 0)
+[OK] case ids equal pinned expectations (observed: {'entries': 22, 'duplicates': [], 'missing': [], 'unexpected': []})
+[OK] every case matches (observed: [])
+[OK] integrity probes are exactly the expected two, all ok (observed: {'entries': 2, 'names': ['premature_tool_call', 'wrong_args_dispatch'], 'not_ok': []})
+[OK] environment verified at pin (observed: {'status': 'verified', 'declared': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'installed': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'})
+[OK] self_check exit 0 (observed: 0)
+[OK] self-check outcomes are exactly the expected seven, none failed (observed: {'ok': ['coverage: dropped last expectation', 'coverage: duplicate id', 'coverage: empty cases list', 'environment: dir_info (no vcs_info)', 'environment: direct_url.json missing', 'environment: wrong commit_id', 'normal run after self-check'], 'failed': []})
+[OK] self-check environment metadata restored (observed: restored)
+[OK] manifest intact after run (observed: None)
+output: /tmp/rvb-test-d08w6ann/out/20261029T144206Z-9tlao2g5
+[OK] test_cases exit 0 (observed: 0)
+[OK] case ids equal pinned expectations (observed: {'entries': 22, 'duplicates': [], 'missing': [], 'unexpected': []})
+[OK] every case matches (observed: [])
+[OK] integrity probes are exactly the expected two, all ok (observed: {'entries': 2, 'names': ['premature_tool_call', 'wrong_args_dispatch'], 'not_ok': []})
+[OK] environment verified at pin (observed: {'status': 'verified', 'declared': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'installed': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'})
+[OK] self_check exit 0 (observed: 0)
+[OK] self-check outcomes are exactly the expected seven, none failed (observed: {'ok': ['coverage: dropped last expectation', 'coverage: duplicate id', 'coverage: empty cases list', 'environment: dir_info (no vcs_info)', 'environment: direct_url.json missing', 'environment: wrong commit_id', 'normal run after self-check'], 'failed': []})
+[FAIL] self-check environment metadata restored (observed: unverified (RuntimeError: boom))
+[OK] manifest intact after run (observed: None)
+output: /tmp/rvb-test-k24poo49/out/20261029T144206Z-g19bm8wv
+[OK] test_cases exit 0 (observed: 0)
+[OK] case ids equal pinned expectations (observed: {'entries': 22, 'duplicates': [], 'missing': [], 'unexpected': []})
+[OK] every case matches (observed: [])
+[OK] integrity probes are exactly the expected two, all ok (observed: {'entries': 2, 'names': ['premature_tool_call', 'wrong_args_dispatch'], 'not_ok': []})
+[OK] environment verified at pin (observed: {'status': 'verified', 'declared': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'installed': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'})
+[FAIL] self_check completed within timeout (observed: 1.0)
+[FAIL] self-check environment metadata restored (observed: unverified)
+[OK] manifest intact after run (observed: None)
+output: /tmp/rvb-test-h8mozd1u/out/20261029T144206Z-4hdrqvm4
+[OK] test_cases exit 0 (observed: 0)
+[FAIL] fresh actual-results.json produced (observed: None)
+[OK] self_check exit 0 (observed: 0)
+[OK] self-check outcomes are exactly the expected seven, none failed (observed: {'ok': ['coverage: dropped last expectation', 'coverage: duplicate id', 'coverage: empty cases list', 'environment: dir_info (no vcs_info)', 'environment: direct_url.json missing', 'environment: wrong commit_id', 'normal run after self-check'], 'failed': []})
+[OK] self-check environment metadata restored (observed: restored)
+[OK] manifest intact after run (observed: None)
+output: /tmp/rvb-test-3oe9titi/out/20261029T144207Z-xzz_dubc
+[FAIL] test_cases exit 0 (observed: 1)
+[FAIL] fresh actual-results.json produced (observed: None)
+[OK] self_check exit 0 (observed: 0)
+[OK] self-check outcomes are exactly the expected seven, none failed (observed: {'ok': ['coverage: dropped last expectation', 'coverage: duplicate id', 'coverage: empty cases list', 'environment: dir_info (no vcs_info)', 'environment: direct_url.json missing', 'environment: wrong commit_id', 'normal run after self-check'], 'failed': []})
+[OK] self-check environment metadata restored (observed: restored)
+[OK] manifest intact after run (observed: None)
+output: /tmp/rvb-test-3rcwg26u/out/20261029T144207Z-lhbkursc
+[FAIL] test_cases completed within timeout (observed: 1.0)
+[OK] self-check environment metadata restored (observed: untouched)
+[OK] manifest intact after run (observed: None)
+output: /tmp/rvb-test-yc8ybsru/out/20261029T144207Z-1wch6361
