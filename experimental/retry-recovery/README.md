@@ -6,7 +6,12 @@ expectations are not adopted MCP semantics.
 The real-MCP recovery harness, non-dispatching pinned-PIC approval adapter, and separate
 retention/readback increment have been exercised. A03 recovery after signer revocation,
 retention policy, and decision/operation mapping remain candidate fixture choices.
-Durable restarts, cross-process/replica concurrency, and production provider behavior remain unexecuted. C01 in-process overlapping requests are exercised separately below.
+The original recovery engine remains in-process and untested for durable restarts,
+concurrent replicas and production provider behavior; a separate D01 fixture is below.
+
+## D01 hard process restart experiment
+
+A separate [SQLite restart fixture](DURABLE-RESTART.md) now exercises a crash after provider effect commit and before application result persistence, with a fresh process reopening a durable reservation. Six hard-exit scenarios passed on Python 3.12 in [GitHub Actions](D01-EVIDENCE.md). The synthetic provider oracle is a second SQLite database, not a real remote payment service. A restart with an unresolved reservation returns unknown without redispatch; reconciliation requires an exact, independently correlated provider result. An unsafe unreserved control deliberately produces a duplicate. These results do not make the original recovery engine durable or establish exactly-once remote effects.
 
 ## C01 overlapping requests (experimental increment)
 
