@@ -1,12 +1,12 @@
 # Retry recovery: collaboration plan and scenario matrix
 
-Status: draft for collaborator review; updated 2026-10-20.
-The matrix contains both executed and proposed cases; coverage is identified below. These
+Status: experimental integration complete through PRs #2, #4, and #5; updated 2026-11-03.
+The matrix contains executed and proposed cases; coverage is identified below. These
 expectations are not adopted MCP semantics.
-A real-MCP recovery harness is implemented and run (see below). A non-dispatching PIC
-signed-approval adapter is implemented in `pic_adapter/` and exercised with real pinned PIC
-verification. A03 is exercised as an MCP scenario under a candidate recovery policy proposed
-for review; pruning, durability and concurrency remain unexecuted.
+The real-MCP recovery harness, non-dispatching pinned-PIC approval adapter, and separate
+retention/readback increment have been exercised. A03 recovery after signer revocation,
+retention policy, and decision/operation mapping remain candidate fixture choices.
+Durable restarts, concurrency, and production provider behavior remain unexecuted.
 
 ## Purpose and ownership
 
@@ -93,7 +93,7 @@ controls to test, not MCP conformance. In-process policy tests are distinguished
 | A02 | Same expiry, but current receipt disclosure denied | 1 | Denial without receipt marker, no dispatch |
 | A03 | Signer key revoked after first commit; retained receipt; recovery identity independently authenticated | 1 | Reject that approval for new execution; disclose historical receipt only under explicit current recovery policy |
 | A04 | Caller execution authority withdrawn after first commit | 1 | No new effect; vary disclosure permission independently and assert both outcomes |
-| A05 | Same key/arguments presented by another tenant or principal | 1 for original; no new effect in rejection case | No original receipt/existence leak; reject fixture context change; separately defined genuinely new operations are not this case |
+| A05 | Same key/arguments presented by another tenant or principal | 1 for original; no new effect in rejection case | No original receipt on cross-context rejection; existence hiding is not established; separately defined genuinely new operations are not this case |
 | A06 | Same scoped operation ID with changed payment, amount, currency or tool | 1 | Conflict/rejection, no cached receipt substitution and no dispatch; include signed-payload tampering control |
 | A07 | New valid signed approval/ref, same authenticated decision-to-operation mapping | 1 | Recover same operation; new approval is not new operation identity |
 | T01 | Receipt/dedup record pruned at 24h, approval still valid at day 2 of 7 days | 1 under safe profile | Reject recovery or report unknown according to chosen policy; lookup miss alone never authorizes dispatch |
@@ -298,20 +298,20 @@ Suggested implementation sequence:
 3. Integrate actual pinned PIC verification; run independent PIC baseline first. (Done.)
 4. Add expiry, the two revocation cases, disclosure and reissuance tests. (Done; A03 under
    the candidate recovery policy proposed for review.)
-5. Add pruning/unknown-outcome cases, then concurrency and contributed fault definitions.
+5. Add pruning/unknown-outcome cases. (Done in the separate retention/readback increment.)
+   Concurrency and contributed fault definitions remain separate follow-ups.
 6. Publish actual results and limitations; map candidate vectors to a reviewed SEP draft.
 
 Do not cite contributor registry/model statistics as fixture validation. The Oct 15
 registry-sampling correction supersedes the earlier figures; raw methods/results require
 review before reuse.
 
-## Review questions
+## Open questions and follow-up decisions
 
-- Does the verifier expose a supported deterministic clock and keyring override at the pin?
-  Keyring: yes. Clock: no SDK parameter; a worker-scoped test clock is proposed in
-  adapter-contract.md as test instrumentation.
-- Which outputs can Fabio independently report without inferring caller authorization?
-  Proposed in adapter-contract.md (check statuses and the precise meaning of `signer_trust`).
+- The pinned PIC verifier supports keyring injection but no clock parameter; the adapter uses
+  worker-scoped test clock instrumentation, not an SDK clock API (see adapter-contract.md).
+- Adapter outputs report signature/profile checks, not authenticated caller authorization
+  or permission to disclose a historical receipt (see `signer_trust` in adapter-contract.md).
 - Should denied recovery reveal any existence/status information in the chosen fixture policy?
 - What immutable admission evidence survives pruning, and how is reissuance bound to it?
 - Which first subset can we complete before considering an upstream conformance proposal?
