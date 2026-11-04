@@ -6,11 +6,11 @@ expectations are not adopted MCP semantics.
 The real-MCP recovery harness, non-dispatching pinned-PIC approval adapter, and separate
 retention/readback increment have been exercised. A03 recovery after signer revocation,
 retention policy, and decision/operation mapping remain candidate fixture choices.
-Durable restarts, concurrency, and production provider behavior remain unexecuted.
+Durable restarts, cross-process/replica concurrency, and production provider behavior remain unexecuted. C01 in-process overlapping requests are exercised separately below.
 
 ## C01 overlapping requests (experimental increment)
 
-A separate [C01 concurrency fixture](CONCURRENCY.md) models overlapping mutating calls with an event-held provider effect. It contrasts an in-process lock-protected reservation-first policy with a deliberately unsafe check-then-act implementation. It includes six deterministic concurrent-task regressions and a five-case real-MCP runner. The original sequential engine is unchanged. The MCP cases require validation in the new CI workflow; this increment does not establish durability, cross-process or production concurrency safety.
+A separate [C01 concurrency fixture](CONCURRENCY.md) models overlapping mutating calls with an event-held provider effect. It contrasts an in-process lock-protected reservation-first policy with a deliberately unsafe check-then-act implementation. It includes six deterministic concurrent-task regressions and a five-case real-MCP runner. The original sequential engine is unchanged. The six unit tests and five MCP 2.2.0 scenarios passed in GitHub Actions; see [C01 execution evidence](C01-EVIDENCE.md). This does not establish durability, cross-process or production concurrency safety.
 
 ## Purpose and ownership
 
@@ -104,7 +104,7 @@ controls to test, not MCP conformance. In-process policy tests are distinguished
 | T02 | Same pruning plus approval reissuance | 1 under safe profile | Reissuance must not reset original operation admission window; retain independent mapping/tombstone or reject unverifiable recovery |
 | T03 | Caller replaces claimed creation timestamp to appear fresh | 1 under safe profile | Reject changed/untrusted admission evidence; timestamp alone cannot restore eligibility |
 | T04 | New, explicitly admitted operation after old window; distinguish from retry | 2 total only when independently authorized as new | Positive control: do not collapse legitimately distinct operations solely because arguments match |
-| C01 | Concurrent requests with same scoped ID and semantic request | 1 under safe profile | Atomic reservation; other request gets retained result or in-progress/unknown; no unlocked check-then-act |
+| C01 | Concurrent requests with same scoped ID and semantic request | 1 under tested in-process reservation-first profile | Five MCP overlapping-request cases and six unit tests exercised in a separate [C01 fixture](CONCURRENCY.md); unsafe check-then-act control deliberately produces two effects, with no cross-process durability claim |
 | X01 | Duplicate transport delivery with same operation identity | 1 under safe profile | Application effect suppression; log transport fault separately from model/application retry |
 | X02 | Read-back returns empty while original request is in flight or provider visibility is delayed | 1 after controlled completion | Remain unknown until reliable evidence; missing list entry is not proof of non-execution |
 | X03 | Transport success with empty payload | Assert actual oracle independently | Do not report confirmed success/non-execution solely from transport status; inspect operation outcome evidence |
