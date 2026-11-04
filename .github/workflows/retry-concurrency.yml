@@ -1,0 +1,30 @@
+name: Retry recovery C01 concurrency
+on:
+  pull_request:
+    paths:
+      - 'experimental/retry-recovery/concurrency.py'
+      - 'experimental/retry-recovery/test_concurrency.py'
+      - 'experimental/retry-recovery/run_concurrency_cases.py'
+      - 'experimental/retry-recovery/CONCURRENCY.md'
+      - '.github/workflows/retry-concurrency.yml'
+  workflow_dispatch:
+jobs:
+  c01:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - working-directory: experimental/retry-recovery
+        run: python -m unittest -v test_concurrency
+      - working-directory: experimental/retry-recovery
+        run: python run_concurrency_cases.py --output local-results/c01-results.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: c01-results
+          path: experimental/retry-recovery/local-results/c01-results.json
+          if-no-files-found: warn
