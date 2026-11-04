@@ -1,0 +1,8 @@
+negotiated protocolVersion: 2025-11-25
+[fault] dropped attempt-1 tools/call response after commit (jsonrpc_id=2); client will perceive a timeout
+attempt 1: client-perceived timeout (MCPError)
+attempt 2: completed (effect_id=cf935bfb..., result=deduped)
+attempt-1 JSON-RPC id: 2
+attempt-2 JSON-RPC id: 3
+authoritative effect count: 1
+POSITIVE CONTROL: 1 external effect for 1 logical operation (retry absorbed by application-level dedup)

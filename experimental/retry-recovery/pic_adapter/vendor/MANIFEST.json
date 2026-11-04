@@ -1,0 +1,26 @@
+{
+  "files": [
+    {"path": "LICENSE", "sha256": "bf0faa9d3bc77be4deaff445f847bea6107ce9f6e2671af019e95882c0b00db2", "upstream_path": "LICENSE"},
+    {"path": "README.md", "sha256": "74f1c7674c8d505fb0e8489f09c77c38e047c48c586cd5e0b72d0f08e6633223", "upstream_path": "examples/refund-approval/README.md"},
+    {"path": "actual-results.json", "sha256": "8f0b16932ab1fa2de76cd1aa9403e382a62b30a4d380ba49d56b904322df1d21", "upstream_path": "examples/refund-approval/actual-results.json"},
+    {"path": "constraints.txt", "sha256": "6a8789f1e468138f5b0f7d038dca1a94bb94ea22612b20ca470cf2da3c8f398c", "upstream_path": "examples/refund-approval/constraints.txt"},
+    {"path": "environment.txt", "sha256": "21e72573e802d547efc238a4789aedf5be3e752ec27496a682ff79545e570d23", "upstream_path": "examples/refund-approval/environment.txt"},
+    {"path": "fixtures/expected-outcomes.json", "sha256": "73aca5fa567ed3d3f04ec6eb122d97a2fa3ca219d8d474c3ccf1adf4c28b4574", "upstream_path": "examples/refund-approval/fixtures/expected-outcomes.json"},
+    {"path": "fixtures/merchant_decision.json", "sha256": "6ded4ee905100b92c4902fc63ff06ebff54e6d91983d22545915601078dc78d6", "upstream_path": "examples/refund-approval/fixtures/merchant_decision.json"},
+    {"path": "fixtures/signed-proposal-example.json", "sha256": "f15d6e586f2c0e763418cbe93047ae8651b9e182653eab4f256452868a9e874e", "upstream_path": "examples/refund-approval/fixtures/signed-proposal-example.json"},
+    {"path": "integration.py", "sha256": "5b556c4373ccfee41573044ed60609ed3a15d829db1ceea5cf35803041484a15", "upstream_path": "examples/refund-approval/integration.py"},
+    {"path": "keys/README.md", "sha256": "88c37000c68b6326629ea42ddde0f5001d6c6efb78ea8386bb0dcea3b4587c6f", "upstream_path": "examples/refund-approval/keys/README.md"},
+    {"path": "keys/merchant_test_private.hex", "sha256": "69cb65712b6e3b31d67de53e7eefa898027dc63e19f4f67ae0ae3e698a8fa0f8", "upstream_path": "examples/refund-approval/keys/merchant_test_private.hex"},
+    {"path": "keys/merchant_test_public.hex", "sha256": "40d359139cfd8af4ff3ebfbf9c8845468ca7876582189c11d3293b832f660632", "upstream_path": "examples/refund-approval/keys/merchant_test_public.hex"},
+    {"path": "keys/pic_keys.example.json", "sha256": "dc8c6e27492398c7ec68cd0d2b4f101eadc73e1d90b0317fa2b795e90fddf172", "upstream_path": "examples/refund-approval/keys/pic_keys.example.json"},
+    {"path": "requirements.txt", "sha256": "090864769e32445b3778eb2a1f23097a01c3dd3493ece0392cdabc4f65dce008", "upstream_path": "examples/refund-approval/requirements.txt"},
+    {"path": "self_check.py", "sha256": "dd2bcea51cc2a28d4bf9054bcf8d6ae237eee1ca05fe3f5f01f45f68070891b8", "upstream_path": "examples/refund-approval/self_check.py"},
+    {"path": "sign_and_verify.py", "sha256": "66f64a7fb944479955dd00e8f29459f712e59acff7086ced163b4460699c2c9a", "upstream_path": "examples/refund-approval/sign_and_verify.py"},
+    {"path": "test_cases.py", "sha256": "ab8208a0daa8bda79d8be7a0ebfeaf1237d51f997da4be207eee944b8f48dee3", "upstream_path": "examples/refund-approval/test_cases.py"}
+  ],
+  "manifest_version": 1,
+  "pic_sdk_commit": "330fdd817ef81d43461ea1787939e0d1cc87d589",
+  "upstream_commit": "eb7cd4672addc02e1ea80a7a83fadf97d9b0a93e",
+  "upstream_repository": "https://github.com/pic-standard/pic-standard",
+  "vendored_dir": "refund_approval_eb7cd467"
+}
