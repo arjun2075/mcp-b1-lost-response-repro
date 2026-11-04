@@ -8,6 +8,10 @@ retention/readback increment have been exercised. A03 recovery after signer revo
 retention policy, and decision/operation mapping remain candidate fixture choices.
 Durable restarts, concurrency, and production provider behavior remain unexecuted.
 
+## C01 overlapping requests (experimental increment)
+
+A separate [C01 concurrency fixture](CONCURRENCY.md) models overlapping mutating calls with an event-held provider effect. It contrasts an in-process lock-protected reservation-first policy with a deliberately unsafe check-then-act implementation. It includes six deterministic concurrent-task regressions and a five-case real-MCP runner. The original sequential engine is unchanged. The MCP cases require validation in the new CI workflow; this increment does not establish durability, cross-process or production concurrency safety.
+
 ## Purpose and ownership
 
 Build deterministic test material for the retry-identity work discussed in
