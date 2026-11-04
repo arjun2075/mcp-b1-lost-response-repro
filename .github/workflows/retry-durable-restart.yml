@@ -1,0 +1,31 @@
+name: Retry recovery D01 durable restart
+on:
+  pull_request:
+    paths:
+      - 'experimental/retry-recovery/durable_restart.py'
+      - 'experimental/retry-recovery/test_durable_restart.py'
+      - 'experimental/retry-recovery/run_durable_cases.py'
+      - 'experimental/retry-recovery/DURABLE-RESTART.md'
+      - '.github/workflows/retry-durable-restart.yml'
+  workflow_dispatch:
+jobs:
+  d01:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fresh-process hard-exit unit scenarios
+        working-directory: experimental/retry-recovery
+        run: python -m unittest -v test_durable_restart
+      - name: Archive D01 source-hashed scenarios
+        working-directory: experimental/retry-recovery
+        run: python run_durable_cases.py --output local-results/d01-results.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d01-restart-results
+          path: experimental/retry-recovery/local-results/d01-results.json
+          if-no-files-found: warn
