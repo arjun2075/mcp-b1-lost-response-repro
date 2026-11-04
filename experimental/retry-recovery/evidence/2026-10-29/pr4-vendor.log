@@ -1,0 +1,10 @@
+[OK] test_cases exit 0 (observed: 0)
+[OK] case ids equal pinned expectations (observed: {'entries': 22, 'duplicates': [], 'missing': [], 'unexpected': []})
+[OK] every case matches (observed: [])
+[OK] integrity probes are exactly the expected two, all ok (observed: {'entries': 2, 'names': ['premature_tool_call', 'wrong_args_dispatch'], 'not_ok': []})
+[OK] environment verified at pin (observed: {'status': 'verified', 'declared': '330fdd817ef81d43461ea1787939e0d1cc87d589', 'installed': '330fdd817ef81d43461ea1787939e0d1cc87d589'})
+[OK] self_check exit 0 (observed: 0)
+[OK] self-check outcomes are exactly the expected seven, none failed (observed: {'ok': ['coverage: empty cases list', 'coverage: dropped last expectation', 'coverage: duplicate id', 'environment: wrong commit_id', 'environment: direct_url.json missing', 'environment: dir_info (no vcs_info)', 'normal run after self-check'], 'failed': []})
+[OK] self-check environment metadata restored (observed: restored)
+[OK] manifest intact after run (observed: None)
+output: /workspace/scratch/4b07f33bf306/mcp-b1-lost-response-repro/experimental/retry-recovery/local-results/pr4-review/vendor/20261029T144244Z-rvbsl8u3

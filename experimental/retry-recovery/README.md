@@ -25,6 +25,15 @@ payment provider. The expanded fixture must describe its own persistence and tra
 boundaries explicitly; it must not turn a local ledger result into an exactly-once
 guarantee for a remote payment.
 
+## Retention and readback increment (2026-10-29)
+
+T01–T03 now have a separate executable increment in `run_retention_cases.py`:
+14 retention/approval cases and 3 non-authoritative readback cases. See
+[retention-readback.md](retention-readback.md) for the policy, the independent
+PR #4 verification, exact external trace mapping, evidence and commands.
+The original runner and its pending labels are unchanged; this increment does
+not claim durability, concurrency or adopted protocol semantics.
+
 ## Fixed baselines
 
 | Component | Pin | Use |
