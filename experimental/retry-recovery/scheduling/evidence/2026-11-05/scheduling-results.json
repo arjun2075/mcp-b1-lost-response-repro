@@ -1,0 +1,1093 @@
+{
+  "python": "3.12.13",
+  "mcp": "2.2.0",
+  "mcp_types": "2.2.0",
+  "source_sha256": {
+    "scheduling_fixture.py": "fbc8f88b91595060688616f88f4c4a2a7ac1e6dd873307c12de3df6b4921b80e",
+    "test_scheduling_fixture.py": "3b56fb1b6119041152df5e35a4a3c040057df6a25930ed1fdb3155355ce6d342"
+  },
+  "environment": {
+    "distributions": [
+      "annotated-types==0.8.0",
+      "anyio==4.15.1",
+      "attrs==26.1.0",
+      "cffi==2.1.1",
+      "click==8.5.0",
+      "cryptography==50.0.2",
+      "h11==0.16.0",
+      "httpcore2==2.13.1",
+      "httpx2==2.13.1",
+      "idna==3.20",
+      "jsonschema-specifications==2025.9.1",
+      "jsonschema==4.26.0",
+      "mcp-types==2.2.0",
+      "mcp==2.2.0",
+      "opentelemetry-api==1.45.1",
+      "pycparser==3.11",
+      "pydantic==2.14.1",
+      "pydantic_core==2.50.1",
+      "PyJWT==2.15.1",
+      "python-multipart==0.0.32",
+      "referencing==0.37.0",
+      "rpds-py==2026.9.1",
+      "sse-starlette==3.5.0",
+      "starlette==1.9.0",
+      "truststore==0.10.5",
+      "typing-inspection==0.4.4",
+      "typing_extensions==4.16.0",
+      "uvicorn==0.54.0"
+    ],
+    "distributions_sha256": "27a6c96ffa98d7871519c55f535710a76a3ee09601ff624632c57d182fb6d979"
+  },
+  "read_timeout_s": 5.0,
+  "results": [
+    {
+      "row": "S01",
+      "key": "argument",
+      "store": "record-first",
+      "fault": "lost",
+      "label": "safe",
+      "intended": 1,
+      "expected": 1,
+      "observed": 1,
+      "passed": true,
+      "problems": [],
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "forwarded_reply_ids": [
+        1,
+        3,
+        4
+      ],
+      "server_received": [
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": null
+        },
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": null
+        }
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2,
+          "payload": {
+            "batch": "batch-1",
+            "notified": 3,
+            "result": "committed"
+          }
+        }
+      ],
+      "expected_attempts": [
+        {
+          "status": "timeout",
+          "dispatches": 1,
+          "effect_delta": 1,
+          "batch": null
+        },
+        {
+          "status": "replayed",
+          "dispatches": 0,
+          "effect_delta": 0,
+          "batch": "batch-1"
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "jsonrpc_id": 2,
+          "operation_id": null,
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 1,
+          "effect_delta": 1,
+          "committed_batches": [
+            "batch-1"
+          ],
+          "status": "timeout",
+          "batch": null,
+          "payload": null,
+          "client_text": null,
+          "exception": {
+            "type": "MCPError",
+            "code": -32001,
+            "message": "Request 'tools/call' timed out"
+          }
+        },
+        {
+          "attempt": 2,
+          "jsonrpc_id": 3,
+          "operation_id": null,
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 0,
+          "effect_delta": 0,
+          "committed_batches": [],
+          "status": "replayed",
+          "batch": "batch-1",
+          "payload": {
+            "batch": "batch-1",
+            "notified": 3,
+            "result": "replayed"
+          },
+          "client_text": "{\"batch\": \"batch-1\", \"notified\": 3, \"result\": \"replayed\"}",
+          "exception": null
+        }
+      ],
+      "ledger": [
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-1",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-2",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-3",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        }
+      ]
+    },
+    {
+      "row": "S01",
+      "key": "operation_id",
+      "store": "record-first",
+      "fault": "lost",
+      "label": "safe",
+      "intended": 1,
+      "expected": 1,
+      "observed": 1,
+      "passed": true,
+      "problems": [],
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "forwarded_reply_ids": [
+        1,
+        3,
+        4
+      ],
+      "server_received": [
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": "op-1"
+        },
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": "op-1"
+        }
+      ],
+      "transport_faults": [
+        {
+          "event": "response_dropped_after_commit",
+          "jsonrpc_id": 2,
+          "payload": {
+            "batch": "batch-1",
+            "notified": 3,
+            "result": "committed"
+          }
+        }
+      ],
+      "expected_attempts": [
+        {
+          "status": "timeout",
+          "dispatches": 1,
+          "effect_delta": 1,
+          "batch": null
+        },
+        {
+          "status": "replayed",
+          "dispatches": 0,
+          "effect_delta": 0,
+          "batch": "batch-1"
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "jsonrpc_id": 2,
+          "operation_id": "op-1",
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 1,
+          "effect_delta": 1,
+          "committed_batches": [
+            "batch-1"
+          ],
+          "status": "timeout",
+          "batch": null,
+          "payload": null,
+          "client_text": null,
+          "exception": {
+            "type": "MCPError",
+            "code": -32001,
+            "message": "Request 'tools/call' timed out"
+          }
+        },
+        {
+          "attempt": 2,
+          "jsonrpc_id": 3,
+          "operation_id": "op-1",
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 0,
+          "effect_delta": 0,
+          "committed_batches": [],
+          "status": "replayed",
+          "batch": "batch-1",
+          "payload": {
+            "batch": "batch-1",
+            "notified": 3,
+            "result": "replayed"
+          },
+          "client_text": "{\"batch\": \"batch-1\", \"notified\": 3, \"result\": \"replayed\"}",
+          "exception": null
+        }
+      ],
+      "ledger": [
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-1",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-2",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-3",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        }
+      ]
+    },
+    {
+      "row": "S02",
+      "key": "argument",
+      "store": "record-first",
+      "fault": "none",
+      "label": "expected counterexample",
+      "intended": 2,
+      "expected": 1,
+      "observed": 1,
+      "passed": true,
+      "problems": [],
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        4
+      ],
+      "forwarded_reply_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "server_received": [
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": null
+        },
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": null
+        }
+      ],
+      "transport_faults": [],
+      "expected_attempts": [
+        {
+          "status": "committed",
+          "dispatches": 1,
+          "effect_delta": 1,
+          "batch": "batch-1"
+        },
+        {
+          "status": "replayed",
+          "dispatches": 0,
+          "effect_delta": 0,
+          "batch": "batch-1"
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "jsonrpc_id": 2,
+          "operation_id": null,
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 1,
+          "effect_delta": 1,
+          "committed_batches": [
+            "batch-1"
+          ],
+          "status": "committed",
+          "batch": "batch-1",
+          "payload": {
+            "batch": "batch-1",
+            "notified": 3,
+            "result": "committed"
+          },
+          "client_text": "{\"batch\": \"batch-1\", \"notified\": 3, \"result\": \"committed\"}",
+          "exception": null
+        },
+        {
+          "attempt": 2,
+          "jsonrpc_id": 4,
+          "operation_id": null,
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 0,
+          "effect_delta": 0,
+          "committed_batches": [],
+          "status": "replayed",
+          "batch": "batch-1",
+          "payload": {
+            "batch": "batch-1",
+            "notified": 3,
+            "result": "replayed"
+          },
+          "client_text": "{\"batch\": \"batch-1\", \"notified\": 3, \"result\": \"replayed\"}",
+          "exception": null
+        }
+      ],
+      "ledger": [
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-1",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-2",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-3",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        }
+      ]
+    },
+    {
+      "row": "S02",
+      "key": "operation_id",
+      "store": "record-first",
+      "fault": "none",
+      "label": "safe",
+      "intended": 2,
+      "expected": 2,
+      "observed": 2,
+      "passed": true,
+      "problems": [],
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        4
+      ],
+      "forwarded_reply_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "server_received": [
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": "op-1"
+        },
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": "op-2"
+        }
+      ],
+      "transport_faults": [],
+      "expected_attempts": [
+        {
+          "status": "committed",
+          "dispatches": 1,
+          "effect_delta": 1,
+          "batch": "batch-1"
+        },
+        {
+          "status": "committed",
+          "dispatches": 1,
+          "effect_delta": 1,
+          "batch": "batch-2"
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "jsonrpc_id": 2,
+          "operation_id": "op-1",
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 1,
+          "effect_delta": 1,
+          "committed_batches": [
+            "batch-1"
+          ],
+          "status": "committed",
+          "batch": "batch-1",
+          "payload": {
+            "batch": "batch-1",
+            "notified": 3,
+            "result": "committed"
+          },
+          "client_text": "{\"batch\": \"batch-1\", \"notified\": 3, \"result\": \"committed\"}",
+          "exception": null
+        },
+        {
+          "attempt": 2,
+          "jsonrpc_id": 4,
+          "operation_id": "op-2",
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 1,
+          "effect_delta": 1,
+          "committed_batches": [
+            "batch-2"
+          ],
+          "status": "committed",
+          "batch": "batch-2",
+          "payload": {
+            "batch": "batch-2",
+            "notified": 3,
+            "result": "committed"
+          },
+          "client_text": "{\"batch\": \"batch-2\", \"notified\": 3, \"result\": \"committed\"}",
+          "exception": null
+        }
+      ],
+      "ledger": [
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-1",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-2",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-3",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-2",
+          "attendee": "attendee-1",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-2",
+          "attendee": "attendee-2",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-2",
+          "attendee": "attendee-3",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        }
+      ]
+    },
+    {
+      "row": "S03",
+      "key": "argument",
+      "store": "success-only",
+      "fault": "error",
+      "label": "expected counterexample",
+      "intended": 1,
+      "expected": 2,
+      "observed": 2,
+      "passed": true,
+      "problems": [],
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "forwarded_reply_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "server_received": [
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": null
+        },
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": null
+        }
+      ],
+      "transport_faults": [],
+      "expected_attempts": [
+        {
+          "status": "injected_error",
+          "dispatches": 1,
+          "effect_delta": 1,
+          "batch": null
+        },
+        {
+          "status": "committed",
+          "dispatches": 1,
+          "effect_delta": 1,
+          "batch": "batch-2"
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "jsonrpc_id": 2,
+          "operation_id": null,
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 1,
+          "effect_delta": 1,
+          "committed_batches": [
+            "batch-1"
+          ],
+          "status": "injected_error",
+          "batch": null,
+          "payload": null,
+          "client_text": "Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result",
+          "exception": null
+        },
+        {
+          "attempt": 2,
+          "jsonrpc_id": 3,
+          "operation_id": null,
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 1,
+          "effect_delta": 1,
+          "committed_batches": [
+            "batch-2"
+          ],
+          "status": "committed",
+          "batch": "batch-2",
+          "payload": {
+            "batch": "batch-2",
+            "notified": 3,
+            "result": "committed"
+          },
+          "client_text": "{\"batch\": \"batch-2\", \"notified\": 3, \"result\": \"committed\"}",
+          "exception": null
+        }
+      ],
+      "ledger": [
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-1",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-2",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-3",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-2",
+          "attendee": "attendee-1",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-2",
+          "attendee": "attendee-2",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-2",
+          "attendee": "attendee-3",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        }
+      ]
+    },
+    {
+      "row": "S03",
+      "key": "operation_id",
+      "store": "success-only",
+      "fault": "error",
+      "label": "expected counterexample",
+      "intended": 1,
+      "expected": 2,
+      "observed": 2,
+      "passed": true,
+      "problems": [],
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "forwarded_reply_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "server_received": [
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": "op-1"
+        },
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": "op-1"
+        }
+      ],
+      "transport_faults": [],
+      "expected_attempts": [
+        {
+          "status": "injected_error",
+          "dispatches": 1,
+          "effect_delta": 1,
+          "batch": null
+        },
+        {
+          "status": "committed",
+          "dispatches": 1,
+          "effect_delta": 1,
+          "batch": "batch-2"
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "jsonrpc_id": 2,
+          "operation_id": "op-1",
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 1,
+          "effect_delta": 1,
+          "committed_batches": [
+            "batch-1"
+          ],
+          "status": "injected_error",
+          "batch": null,
+          "payload": null,
+          "client_text": "Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result",
+          "exception": null
+        },
+        {
+          "attempt": 2,
+          "jsonrpc_id": 3,
+          "operation_id": "op-1",
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 1,
+          "effect_delta": 1,
+          "committed_batches": [
+            "batch-2"
+          ],
+          "status": "committed",
+          "batch": "batch-2",
+          "payload": {
+            "batch": "batch-2",
+            "notified": 3,
+            "result": "committed"
+          },
+          "client_text": "{\"batch\": \"batch-2\", \"notified\": 3, \"result\": \"committed\"}",
+          "exception": null
+        }
+      ],
+      "ledger": [
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-1",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-2",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-3",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-2",
+          "attendee": "attendee-1",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-2",
+          "attendee": "attendee-2",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-2",
+          "attendee": "attendee-3",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        }
+      ]
+    },
+    {
+      "row": "S03",
+      "key": "argument",
+      "store": "record-first",
+      "fault": "error",
+      "label": "safe",
+      "intended": 1,
+      "expected": 1,
+      "observed": 1,
+      "passed": true,
+      "problems": [],
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "forwarded_reply_ids": [
+        1,
+        2,
+        3
+      ],
+      "server_received": [
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": null
+        },
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": null
+        }
+      ],
+      "transport_faults": [],
+      "expected_attempts": [
+        {
+          "status": "injected_error",
+          "dispatches": 1,
+          "effect_delta": 1,
+          "batch": null
+        },
+        {
+          "status": "outcome_unknown",
+          "dispatches": 0,
+          "effect_delta": 0,
+          "batch": null
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "jsonrpc_id": 2,
+          "operation_id": null,
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 1,
+          "effect_delta": 1,
+          "committed_batches": [
+            "batch-1"
+          ],
+          "status": "injected_error",
+          "batch": null,
+          "payload": null,
+          "client_text": "Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result",
+          "exception": null
+        },
+        {
+          "attempt": 2,
+          "jsonrpc_id": 3,
+          "operation_id": null,
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 0,
+          "effect_delta": 0,
+          "committed_batches": [],
+          "status": "outcome_unknown",
+          "batch": null,
+          "payload": null,
+          "client_text": "Error executing tool reschedule_meeting: outcome unknown for this operation; not dispatched again",
+          "exception": null
+        }
+      ],
+      "ledger": [
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-1",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-2",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-3",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        }
+      ]
+    },
+    {
+      "row": "S03",
+      "key": "operation_id",
+      "store": "record-first",
+      "fault": "error",
+      "label": "safe",
+      "intended": 1,
+      "expected": 1,
+      "observed": 1,
+      "passed": true,
+      "problems": [],
+      "protocol_version": "2025-11-25",
+      "jsonrpc_ids": [
+        2,
+        3
+      ],
+      "forwarded_reply_ids": [
+        1,
+        2,
+        3
+      ],
+      "server_received": [
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": "op-1"
+        },
+        {
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague",
+          "operation_id": "op-1"
+        }
+      ],
+      "transport_faults": [],
+      "expected_attempts": [
+        {
+          "status": "injected_error",
+          "dispatches": 1,
+          "effect_delta": 1,
+          "batch": null
+        },
+        {
+          "status": "outcome_unknown",
+          "dispatches": 0,
+          "effect_delta": 0,
+          "batch": null
+        }
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "jsonrpc_id": 2,
+          "operation_id": "op-1",
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 1,
+          "effect_delta": 1,
+          "committed_batches": [
+            "batch-1"
+          ],
+          "status": "injected_error",
+          "batch": null,
+          "payload": null,
+          "client_text": "Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result",
+          "exception": null
+        },
+        {
+          "attempt": 2,
+          "jsonrpc_id": 3,
+          "operation_id": "op-1",
+          "arguments": {
+            "meeting_id": "meeting-fixture-1",
+            "start": "2026-11-03T10:00",
+            "timezone": "Europe/Prague"
+          },
+          "dispatches": 0,
+          "effect_delta": 0,
+          "committed_batches": [],
+          "status": "outcome_unknown",
+          "batch": null,
+          "payload": null,
+          "client_text": "Error executing tool reschedule_meeting: outcome unknown for this operation; not dispatched again",
+          "exception": null
+        }
+      ],
+      "ledger": [
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-1",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-2",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        },
+        {
+          "batch": "batch-1",
+          "attendee": "attendee-3",
+          "meeting_id": "meeting-fixture-1",
+          "start": "2026-11-03T10:00",
+          "timezone": "Europe/Prague"
+        }
+      ]
+    }
+  ],
+  "passed": 8,
+  "total": 8,
+  "scope": "real MCP memory streams; synthetic in-process ledger and dedup store"
+}

@@ -1,0 +1,34 @@
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: outcome unknown for this operation; not dispatched again'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: outcome unknown for this operation; not dispatched again'
+trace {"row": "S01", "key": "argument", "store": "record-first", "attempt": 1, "jsonrpc_id": 2, "operation_id": null, "dispatches": 1, "effect_delta": 1, "status": "timeout", "batch": null}
+trace {"row": "S01", "key": "argument", "store": "record-first", "attempt": 2, "jsonrpc_id": 3, "operation_id": null, "dispatches": 0, "effect_delta": 0, "status": "replayed", "batch": "batch-1"}
+trace {"row": "S01", "key": "operation_id", "store": "record-first", "attempt": 1, "jsonrpc_id": 2, "operation_id": "op-1", "dispatches": 1, "effect_delta": 1, "status": "timeout", "batch": null}
+trace {"row": "S01", "key": "operation_id", "store": "record-first", "attempt": 2, "jsonrpc_id": 3, "operation_id": "op-1", "dispatches": 0, "effect_delta": 0, "status": "replayed", "batch": "batch-1"}
+trace {"row": "S02", "key": "argument", "store": "record-first", "attempt": 1, "jsonrpc_id": 2, "operation_id": null, "dispatches": 1, "effect_delta": 1, "status": "committed", "batch": "batch-1"}
+trace {"row": "S02", "key": "argument", "store": "record-first", "attempt": 2, "jsonrpc_id": 4, "operation_id": null, "dispatches": 0, "effect_delta": 0, "status": "replayed", "batch": "batch-1"}
+trace {"row": "S02", "key": "operation_id", "store": "record-first", "attempt": 1, "jsonrpc_id": 2, "operation_id": "op-1", "dispatches": 1, "effect_delta": 1, "status": "committed", "batch": "batch-1"}
+trace {"row": "S02", "key": "operation_id", "store": "record-first", "attempt": 2, "jsonrpc_id": 4, "operation_id": "op-2", "dispatches": 1, "effect_delta": 1, "status": "committed", "batch": "batch-2"}
+trace {"row": "S03", "key": "argument", "store": "success-only", "attempt": 1, "jsonrpc_id": 2, "operation_id": null, "dispatches": 1, "effect_delta": 1, "status": "injected_error", "batch": null}
+trace {"row": "S03", "key": "argument", "store": "success-only", "attempt": 2, "jsonrpc_id": 3, "operation_id": null, "dispatches": 1, "effect_delta": 1, "status": "committed", "batch": "batch-2"}
+trace {"row": "S03", "key": "operation_id", "store": "success-only", "attempt": 1, "jsonrpc_id": 2, "operation_id": "op-1", "dispatches": 1, "effect_delta": 1, "status": "injected_error", "batch": null}
+trace {"row": "S03", "key": "operation_id", "store": "success-only", "attempt": 2, "jsonrpc_id": 3, "operation_id": "op-1", "dispatches": 1, "effect_delta": 1, "status": "committed", "batch": "batch-2"}
+trace {"row": "S03", "key": "argument", "store": "record-first", "attempt": 1, "jsonrpc_id": 2, "operation_id": null, "dispatches": 1, "effect_delta": 1, "status": "injected_error", "batch": null}
+trace {"row": "S03", "key": "argument", "store": "record-first", "attempt": 2, "jsonrpc_id": 3, "operation_id": null, "dispatches": 0, "effect_delta": 0, "status": "outcome_unknown", "batch": null}
+trace {"row": "S03", "key": "operation_id", "store": "record-first", "attempt": 1, "jsonrpc_id": 2, "operation_id": "op-1", "dispatches": 1, "effect_delta": 1, "status": "injected_error", "batch": null}
+trace {"row": "S03", "key": "operation_id", "store": "record-first", "attempt": 2, "jsonrpc_id": 3, "operation_id": "op-1", "dispatches": 0, "effect_delta": 0, "status": "outcome_unknown", "batch": null}
+negotiated protocolVersion: 2025-11-25
+| Row | Key | Store | Intended | Expected | Observed | Dispatches | Effect deltas | Statuses | Batches | Label | Check |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| S01 | argument | record-first | 1 | 1 | 1 | 1,0 | 1,0 | timeout,replayed | -,batch-1 | safe | pass |
+| S01 | operation_id | record-first | 1 | 1 | 1 | 1,0 | 1,0 | timeout,replayed | -,batch-1 | safe | pass |
+| S02 | argument | record-first | 2 | 1 | 1 | 1,0 | 1,0 | committed,replayed | batch-1,batch-1 | expected counterexample | pass |
+| S02 | operation_id | record-first | 2 | 2 | 2 | 1,1 | 1,1 | committed,committed | batch-1,batch-2 | safe | pass |
+| S03 | argument | success-only | 1 | 2 | 2 | 1,1 | 1,1 | injected_error,committed | -,batch-2 | expected counterexample | pass |
+| S03 | operation_id | success-only | 1 | 2 | 2 | 1,1 | 1,1 | injected_error,committed | -,batch-2 | expected counterexample | pass |
+| S03 | argument | record-first | 1 | 1 | 1 | 1,0 | 1,0 | injected_error,outcome_unknown | -,- | safe | pass |
+| S03 | operation_id | record-first | 1 | 1 | 1 | 1,0 | 1,0 | injected_error,outcome_unknown | -,- | safe | pass |
+8/8 cases match expectations

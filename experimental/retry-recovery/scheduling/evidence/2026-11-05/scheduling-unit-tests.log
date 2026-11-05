@@ -1,0 +1,50 @@
+test_drop_recorded_but_error_forwarded_fails (test_scheduling_fixture.BrokenFixtureTests.test_drop_recorded_but_error_forwarded_fails) ... ok
+test_ledger_breakage_blocks_the_s01_drop (test_scheduling_fixture.BrokenFixtureTests.test_ledger_breakage_blocks_the_s01_drop) ... ok
+test_ledger_breakages_fail (test_scheduling_fixture.BrokenFixtureTests.test_ledger_breakages_fail) ... Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+ok
+test_non_mcp_exception_fails_the_case (test_scheduling_fixture.BrokenFixtureTests.test_non_mcp_exception_fails_the_case) ... ok
+test_returned_batch_must_be_the_ledger_batch (test_scheduling_fixture.BrokenFixtureTests.test_returned_batch_must_be_the_ledger_batch) ... Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+ok
+test_s01_error_before_effect_is_not_dropped (test_scheduling_fixture.BrokenFixtureTests.test_s01_error_before_effect_is_not_dropped) ... Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: broken fixture: failed before any effect'
+ok
+test_s01_jsonrpc_error_is_not_dropped (test_scheduling_fixture.BrokenFixtureTests.test_s01_jsonrpc_error_is_not_dropped) ... ok
+test_s01_missing_drop_fails (test_scheduling_fixture.BrokenFixtureTests.test_s01_missing_drop_fails) ... ok
+test_s01_retry_that_redispatches_fails (test_scheduling_fixture.BrokenFixtureTests.test_s01_retry_that_redispatches_fails) ... ok
+test_s01_unguarded_drop_of_error_still_fails_per_attempt (test_scheduling_fixture.BrokenFixtureTests.test_s01_unguarded_drop_of_error_still_fails_per_attempt) ... Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: broken fixture: failed before any effect'
+ok
+test_s02_changed_arguments_fail (test_scheduling_fixture.BrokenFixtureTests.test_s02_changed_arguments_fail) ... ok
+test_s02_operation_ids_are_checked_on_the_wire (test_scheduling_fixture.BrokenFixtureTests.test_s02_operation_ids_are_checked_on_the_wire) ... ok
+test_s02_positive_control_reusing_operation_id_fails (test_scheduling_fixture.BrokenFixtureTests.test_s02_positive_control_reusing_operation_id_fails) ... ok
+test_s03_record_first_retry_returning_success_fails (test_scheduling_fixture.BrokenFixtureTests.test_s03_record_first_retry_returning_success_fails) ... Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+ok
+test_s03_success_only_retry_that_replays_is_caught (test_scheduling_fixture.BrokenFixtureTests.test_s03_success_only_retry_that_replays_is_caught) ... Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+ok
+test_s03_wrong_first_error_fails (test_scheduling_fixture.BrokenFixtureTests.test_s03_wrong_first_error_fails) ... Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: provider rejected the request'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: provider rejected the request'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: outcome unknown for this operation; not dispatched again'
+ok
+test_timeout_coded_error_on_retry_fails (test_scheduling_fixture.BrokenFixtureTests.test_timeout_coded_error_on_retry_fails) ... ok
+test_unknown_break_is_rejected (test_scheduling_fixture.BrokenFixtureTests.test_unknown_break_is_rejected) ... ok
+test_unrelated_mcp_error_on_retry_fails (test_scheduling_fixture.BrokenFixtureTests.test_unrelated_mcp_error_on_retry_fails) ... ok
+test_unrelated_mcp_error_without_lost_fault_fails (test_scheduling_fixture.BrokenFixtureTests.test_unrelated_mcp_error_without_lost_fault_fails) ... ok
+test_all_rows_pass_with_expected_sequences (test_scheduling_fixture.CleanFixtureTests.test_all_rows_pass_with_expected_sequences) ... Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: outcome unknown for this operation; not dispatched again'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: outcome unknown for this operation; not dispatched again'
+ok
+test_s01_drops_only_the_committed_success_and_replays_it (test_scheduling_fixture.CleanFixtureTests.test_s01_drops_only_the_committed_success_and_replays_it) ... ok
+test_s02_positive_control_identical_args_distinct_operation_ids (test_scheduling_fixture.CleanFixtureTests.test_s02_positive_control_identical_args_distinct_operation_ids) ... ok
+test_s03_record_first_retry_gets_exact_outcome_unknown (test_scheduling_fixture.CleanFixtureTests.test_s03_record_first_retry_gets_exact_outcome_unknown) ... Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: injected fault: notifications committed, then an error before the result'
+Tool 'reschedule_meeting' failed: 'Error executing tool reschedule_meeting: outcome unknown for this operation; not dispatched again'
+ok
+test_complete_batches_pass (test_scheduling_fixture.LedgerOracleTests.test_complete_batches_pass) ... ok
+test_missing_duplicate_extra_and_wrong_args_fail (test_scheduling_fixture.LedgerOracleTests.test_missing_duplicate_extra_and_wrong_args_fail) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 4.149s
+
+OK
